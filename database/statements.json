@@ -1,0 +1,58 @@
+[
+    {
+        "step": 263,
+        "statement": "[Title]PLAS"
+    },
+    {
+        "step": 300,
+        "statement": "<<<<< RESET PART >>>>>"
+    },
+    {
+        "step": 332,
+        "statement": "<<<<< Control State >>>>>"
+    },
+    {
+        "step": 355,
+        "statement": "<<<<< EQP State >>>>>"
+    },
+    {
+        "step": 395,
+        "statement": "<<<<< STOP AUTO STEP >>>>>"
+    },
+    {
+        "step": 417,
+        "statement": "<<<<< MODEL NAME >>>>>"
+    },
+    {
+        "step": 433,
+        "statement": "<<<<< ERROR >>>>>"
+    },
+    {
+        "step": 448,
+        "statement": "<<<<< SV01 LOAD / CURRENT >>>>>"
+    },
+    {
+        "step": 498,
+        "statement": "<<<<< SV02 LOAD / CURRENT >>>>>"
+    },
+    {
+        "step": 548,
+        "statement": "<<<<< SV03 LOAD / CURRENT >>>>>"
+    },
+    {
+        "step": 598,
+        "statement": "<<<<< TAPING AUTO >>>>>"
+    },
+    {
+        "step": 664,
+        "statement": "<<<<< Tact Time Triger >>>>>"
+    },
+    {
+        "step": 709,
+        "statement": "<<<<< Tact Time >>>>>"
+    },
+    {
+        "step": 45,
+        "statement": "6"
+    }
+]

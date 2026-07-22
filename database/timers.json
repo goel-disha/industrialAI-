@@ -1,0 +1,110 @@
+[
+    {
+        "timer": "T10",
+        "preset": "K30"
+    },
+    {
+        "timer": "T175",
+        "preset": "K3"
+    },
+    {
+        "timer": "T160",
+        "preset": "K0"
+    },
+    {
+        "timer": "T100",
+        "preset": "D80"
+    },
+    {
+        "timer": "T110",
+        "preset": "K2"
+    },
+    {
+        "timer": "T176",
+        "preset": "D1064"
+    },
+    {
+        "timer": "T185",
+        "preset": "K8"
+    },
+    {
+        "timer": "T155",
+        "preset": "K4"
+    },
+    {
+        "timer": "T101",
+        "preset": "K40"
+    },
+    {
+        "timer": "T150",
+        "preset": "K9999"
+    },
+    {
+        "timer": "T152",
+        "preset": "K1"
+    },
+    {
+        "timer": "T12",
+        "preset": "K5"
+    },
+    {
+        "timer": "T151",
+        "preset": "K9999"
+    },
+    {
+        "timer": "T553",
+        "preset": "K5"
+    },
+    {
+        "timer": "T690",
+        "preset": "K5"
+    },
+    {
+        "timer": "T691",
+        "preset": "K5"
+    },
+    {
+        "timer": "T692",
+        "preset": "K5"
+    },
+    {
+        "timer": "T693",
+        "preset": "K5"
+    },
+    {
+        "timer": "T800",
+        "preset": "K6000"
+    },
+    {
+        "timer": "T801",
+        "preset": "K6000"
+    },
+    {
+        "timer": "T802",
+        "preset": "K6000"
+    },
+    {
+        "timer": "T694",
+        "preset": "K5"
+    },
+    {
+        "timer": "T695",
+        "preset": "K30"
+    },
+    {
+        "timer": "T696",
+        "preset": "K30"
+    },
+    {
+        "timer": "T0",
+        "preset": "K30"
+    },
+    {
+        "timer": "T15",
+        "preset": "K4"
+    },
+    {
+        "timer": "T552",
+        "preset": "K30"
+    }
+]

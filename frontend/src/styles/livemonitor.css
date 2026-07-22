@@ -1,0 +1,91 @@
+.live-monitor{
+
+    padding:20px;
+
+    background:#f4f6f8;
+
+    min-height:100vh;
+
+}
+
+.live-title{
+
+    margin-bottom:20px;
+
+    color:#1f2937;
+
+}
+
+.search-input{
+
+    width:320px;
+
+    padding:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:6px;
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+}
+
+.live-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.live-table th{
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:12px;
+
+    text-align:left;
+
+}
+
+.live-table td{
+
+    padding:10px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.live-table tr:hover{
+
+    background:#f5f9ff;
+
+}
+
+.status-on{
+
+    color:green;
+
+    font-weight:bold;
+
+}
+
+.status-off{
+
+    color:red;
+
+    font-weight:bold;
+
+}

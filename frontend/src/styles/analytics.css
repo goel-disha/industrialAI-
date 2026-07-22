@@ -1,0 +1,101 @@
+.analytics{
+
+    padding:20px;
+
+    background:#f4f6f8;
+
+    min-height:100vh;
+
+}
+
+.card-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin:20px 0;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.card p{
+
+    font-size:30px;
+
+    color:#1976d2;
+
+    margin-top:10px;
+
+}
+
+.panel{
+
+    background:white;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:30px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:20px 0;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:#4caf50;
+
+    transition:.5s;
+
+}
+
+.panel table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.panel td{
+
+    padding:10px;
+
+    border-bottom:1px solid #eee;
+
+}

@@ -1,0 +1,1970 @@
+[
+    {
+        "tag": "M90",
+        "type": "Internal Relay",
+        "address": 90,
+        "comment": "EMERGENCY BIT"
+    },
+    {
+        "tag": "M91",
+        "type": "Internal Relay",
+        "address": 91,
+        "comment": "AIR PRESSURE LOW BIT"
+    },
+    {
+        "tag": "M100",
+        "type": "Internal Relay",
+        "address": 100,
+        "comment": "MANUAL MODE SELECT B"
+    },
+    {
+        "tag": "M101",
+        "type": "Internal Relay",
+        "address": 101,
+        "comment": "VFD_1 FWD HMI BIT"
+    },
+    {
+        "tag": "M102",
+        "type": "Internal Relay",
+        "address": 102,
+        "comment": "VFD_1 REV HMI BIT"
+    },
+    {
+        "tag": "M103",
+        "type": "Internal Relay",
+        "address": 103,
+        "comment": "VFD_2 FWD HMI BIT"
+    },
+    {
+        "tag": "M104",
+        "type": "Internal Relay",
+        "address": 104,
+        "comment": "VFD_2 REV HMI BIT"
+    },
+    {
+        "tag": "M105",
+        "type": "Internal Relay",
+        "address": 105,
+        "comment": "VFD_3 FWD HMI BIT"
+    },
+    {
+        "tag": "M106",
+        "type": "Internal Relay",
+        "address": 106,
+        "comment": "VFD_3 REV HMI BIT"
+    },
+    {
+        "tag": "M107",
+        "type": "Internal Relay",
+        "address": 107,
+        "comment": "SERVO_1 FWD HMI BIT"
+    },
+    {
+        "tag": "M108",
+        "type": "Internal Relay",
+        "address": 108,
+        "comment": "SERVO_1 REV HMI BIT"
+    },
+    {
+        "tag": "M109",
+        "type": "Internal Relay",
+        "address": 109,
+        "comment": "SERVO_2 FWD HMI BIT"
+    },
+    {
+        "tag": "M110",
+        "type": "Internal Relay",
+        "address": 110,
+        "comment": "SERVO_2 REV HMI BIT"
+    },
+    {
+        "tag": "M111",
+        "type": "Internal Relay",
+        "address": 111,
+        "comment": "SERVO_3 FWD HMI BIT"
+    },
+    {
+        "tag": "M112",
+        "type": "Internal Relay",
+        "address": 112,
+        "comment": "SERVO_3 REV HMI BIT"
+    },
+    {
+        "tag": "M113",
+        "type": "Internal Relay",
+        "address": 113,
+        "comment": "CENTRING FWD HIM BIT"
+    },
+    {
+        "tag": "M114",
+        "type": "Internal Relay",
+        "address": 114,
+        "comment": "CENTRING REV HMI BIT"
+    },
+    {
+        "tag": "M120",
+        "type": "Internal Relay",
+        "address": 120,
+        "comment": "MANUAL_VFD_1 FWD BIT"
+    },
+    {
+        "tag": "M121",
+        "type": "Internal Relay",
+        "address": 121,
+        "comment": "MANUAL_VFD_1 REV BIT"
+    },
+    {
+        "tag": "M122",
+        "type": "Internal Relay",
+        "address": 122,
+        "comment": "MANUAL_VFD_2 FWD BIT"
+    },
+    {
+        "tag": "M123",
+        "type": "Internal Relay",
+        "address": 123,
+        "comment": "MANUAL_VFD_2 REV BIT"
+    },
+    {
+        "tag": "M124",
+        "type": "Internal Relay",
+        "address": 124,
+        "comment": "MANUAL_VFD_3 FWD BIT"
+    },
+    {
+        "tag": "M125",
+        "type": "Internal Relay",
+        "address": 125,
+        "comment": "MANUAL_VFD_3 REV BIT"
+    },
+    {
+        "tag": "M126",
+        "type": "Internal Relay",
+        "address": 126,
+        "comment": "MAN_SERVO_1 FWD BIT"
+    },
+    {
+        "tag": "M127",
+        "type": "Internal Relay",
+        "address": 127,
+        "comment": "MAN_SERVO_1 REV BIT"
+    },
+    {
+        "tag": "M128",
+        "type": "Internal Relay",
+        "address": 128,
+        "comment": "MAN_SERVO_2 FWD BIT"
+    },
+    {
+        "tag": "M129",
+        "type": "Internal Relay",
+        "address": 129,
+        "comment": "MAN_SERVO_2 REV BIT"
+    },
+    {
+        "tag": "M130",
+        "type": "Internal Relay",
+        "address": 130,
+        "comment": "MAN_SERVO_3 FWD BIT"
+    },
+    {
+        "tag": "M131",
+        "type": "Internal Relay",
+        "address": 131,
+        "comment": "MAN_SERVO_3 REV BIT"
+    },
+    {
+        "tag": "M132",
+        "type": "Internal Relay",
+        "address": 132,
+        "comment": "MAN_CENTRING FWD BIT"
+    },
+    {
+        "tag": "M133",
+        "type": "Internal Relay",
+        "address": 133,
+        "comment": "MAN_CENTRING REV BIT"
+    },
+    {
+        "tag": "M250",
+        "type": "Internal Relay",
+        "address": 250,
+        "comment": "HOME CALL BIT"
+    },
+    {
+        "tag": "M251",
+        "type": "Internal Relay",
+        "address": 251,
+        "comment": "HOME CMPLT BIT"
+    },
+    {
+        "tag": "M252",
+        "type": "Internal Relay",
+        "address": 252,
+        "comment": "CENTRING REV BIT"
+    },
+    {
+        "tag": "M253",
+        "type": "Internal Relay",
+        "address": 253,
+        "comment": "SERVO_ 1_HOME CALL B"
+    },
+    {
+        "tag": "M254",
+        "type": "Internal Relay",
+        "address": 254,
+        "comment": "SERVO_1 HOME DONE BI"
+    },
+    {
+        "tag": "M255",
+        "type": "Internal Relay",
+        "address": 255,
+        "comment": "SERVO_2_HOME CALL BI"
+    },
+    {
+        "tag": "M256",
+        "type": "Internal Relay",
+        "address": 256,
+        "comment": "SERVO_2 HOME DONE BI"
+    },
+    {
+        "tag": "M257",
+        "type": "Internal Relay",
+        "address": 257,
+        "comment": "SERVO_3_HOME CALL BI"
+    },
+    {
+        "tag": "M258",
+        "type": "Internal Relay",
+        "address": 258,
+        "comment": "SERVO_3_HOME DONE BI"
+    },
+    {
+        "tag": "M500",
+        "type": "Internal Relay",
+        "address": 500,
+        "comment": "AUTO MODE SELECT BIT"
+    },
+    {
+        "tag": "M501",
+        "type": "Internal Relay",
+        "address": 501,
+        "comment": "MAN_SERVO_3 FWD BIT"
+    },
+    {
+        "tag": "M502",
+        "type": "Internal Relay",
+        "address": 502,
+        "comment": "MAN_SERVO_3 REV BIT"
+    },
+    {
+        "tag": "M510",
+        "type": "Internal Relay",
+        "address": 510,
+        "comment": "BREAK BIT"
+    },
+    {
+        "tag": "M702",
+        "type": "Internal Relay",
+        "address": 702,
+        "comment": "AXIS_3 SELECTED"
+    },
+    {
+        "tag": "M1001",
+        "type": "Internal Relay",
+        "address": 1001,
+        "comment": "CYCLE START BIT"
+    },
+    {
+        "tag": "M1002",
+        "type": "Internal Relay",
+        "address": 1002,
+        "comment": "CYCLE START"
+    },
+    {
+        "tag": "M1003",
+        "type": "Internal Relay",
+        "address": 1003,
+        "comment": "LOWER POSTION BIT"
+    },
+    {
+        "tag": "M1004",
+        "type": "Internal Relay",
+        "address": 1004,
+        "comment": "LOWER POS CMPLT BIT"
+    },
+    {
+        "tag": "M1005",
+        "type": "Internal Relay",
+        "address": 1005,
+        "comment": "UPPER POSITION BIT"
+    },
+    {
+        "tag": "M1006",
+        "type": "Internal Relay",
+        "address": 1006,
+        "comment": "UPPER POS CMPLT BIT"
+    },
+    {
+        "tag": "M1010",
+        "type": "Internal Relay",
+        "address": 1010,
+        "comment": "HOME COMPLTE"
+    },
+    {
+        "tag": "M1020",
+        "type": "Internal Relay",
+        "address": 1020,
+        "comment": "JOG FWD BIT"
+    },
+    {
+        "tag": "M1022",
+        "type": "Internal Relay",
+        "address": 1022,
+        "comment": "JOG REV BIT"
+    },
+    {
+        "tag": "M1501",
+        "type": "Internal Relay",
+        "address": 1501,
+        "comment": "AXIS_1 ORIGIN BIT"
+    },
+    {
+        "tag": "M1502",
+        "type": "Internal Relay",
+        "address": 1502,
+        "comment": "AXIS_2 ORIGIN BIT"
+    },
+    {
+        "tag": "M1503",
+        "type": "Internal Relay",
+        "address": 1503,
+        "comment": "AXIS_3 ORIGIN BIT"
+    },
+    {
+        "tag": "M1601",
+        "type": "Internal Relay",
+        "address": 1601,
+        "comment": "HOME_AXIS_1 BIT"
+    },
+    {
+        "tag": "M1602",
+        "type": "Internal Relay",
+        "address": 1602,
+        "comment": "HOME_AXIS_2 BIT"
+    },
+    {
+        "tag": "M1603",
+        "type": "Internal Relay",
+        "address": 1603,
+        "comment": "HOME_AXIS_3 BIT"
+    },
+    {
+        "tag": "M2500",
+        "type": "Internal Relay",
+        "address": 2500,
+        "comment": "ALARM_EMERGENCY STOP"
+    },
+    {
+        "tag": "M2501",
+        "type": "Internal Relay",
+        "address": 2501,
+        "comment": "ALARM_AIR PRESSURE L"
+    },
+    {
+        "tag": "M2502",
+        "type": "Internal Relay",
+        "address": 2502,
+        "comment": "ALARM_AUTO MODE NOT"
+    },
+    {
+        "tag": "M2503",
+        "type": "Internal Relay",
+        "address": 2503,
+        "comment": "ALARM_MODEL NOT SELC"
+    },
+    {
+        "tag": "M2504",
+        "type": "Internal Relay",
+        "address": 2504,
+        "comment": "ALARM_ ROLLER CONV F"
+    },
+    {
+        "tag": "M2505",
+        "type": "Internal Relay",
+        "address": 2505,
+        "comment": "ALARM_BELT_1 CONV F"
+    },
+    {
+        "tag": "M2506",
+        "type": "Internal Relay",
+        "address": 2506,
+        "comment": "ALARM_BELT_2 CONV FA"
+    },
+    {
+        "tag": "M2507",
+        "type": "Internal Relay",
+        "address": 2507,
+        "comment": "ALARM_INFEED CONV FA"
+    },
+    {
+        "tag": "M2508",
+        "type": "Internal Relay",
+        "address": 2508,
+        "comment": "ALARM_WRONG MODEL SE"
+    },
+    {
+        "tag": "M2509",
+        "type": "Internal Relay",
+        "address": 2509,
+        "comment": "ALARM_BEE LABEL NG"
+    },
+    {
+        "tag": "M2510",
+        "type": "Internal Relay",
+        "address": 2510,
+        "comment": "ALARM_TAPING MISSING"
+    },
+    {
+        "tag": "M2511",
+        "type": "Internal Relay",
+        "address": 2511,
+        "comment": "ALARM_AXIS_1 ERROR"
+    },
+    {
+        "tag": "M2512",
+        "type": "Internal Relay",
+        "address": 2512,
+        "comment": "ALARM_AXIS_2 ERROR"
+    },
+    {
+        "tag": "M2513",
+        "type": "Internal Relay",
+        "address": 2513,
+        "comment": "ALARM_AXIS_3 ERROR"
+    },
+    {
+        "tag": "M2514",
+        "type": "Internal Relay",
+        "address": 2514,
+        "comment": "ALARM_CENTRING REV P"
+    },
+    {
+        "tag": "L501",
+        "type": "Latch Relay",
+        "address": 501,
+        "comment": "AUTO_CYCLE START BIT"
+    },
+    {
+        "tag": "L502",
+        "type": "Latch Relay",
+        "address": 502,
+        "comment": "AUTO_SERVO_1 RUN BIT"
+    },
+    {
+        "tag": "L503",
+        "type": "Latch Relay",
+        "address": 503,
+        "comment": "AUTO_SERVO_1 UL2 POS"
+    },
+    {
+        "tag": "L504",
+        "type": "Latch Relay",
+        "address": 504,
+        "comment": "AUTO_SERVO_2 RUN BIT"
+    },
+    {
+        "tag": "L505",
+        "type": "Latch Relay",
+        "address": 505,
+        "comment": "AUTO_SERVO_1 WC POS"
+    },
+    {
+        "tag": "L506",
+        "type": "Latch Relay",
+        "address": 506,
+        "comment": "AUTO_SERVO_3 RUN BIT"
+    },
+    {
+        "tag": "L507",
+        "type": "Latch Relay",
+        "address": 507,
+        "comment": "AUTO_ SERVO_1 MODEL"
+    },
+    {
+        "tag": "L508",
+        "type": "Latch Relay",
+        "address": 508,
+        "comment": "AUTO_CENTRING FWD BI"
+    },
+    {
+        "tag": "L509",
+        "type": "Latch Relay",
+        "address": 509,
+        "comment": "AUTO_CENTRING FWD CN"
+    },
+    {
+        "tag": "L510",
+        "type": "Latch Relay",
+        "address": 510,
+        "comment": "AUTO_CENTRING REV BI"
+    },
+    {
+        "tag": "L511",
+        "type": "Latch Relay",
+        "address": 511,
+        "comment": "AUTO_CENTRING REV CN"
+    },
+    {
+        "tag": "L512",
+        "type": "Latch Relay",
+        "address": 512,
+        "comment": "AUTO_M/C BEFORE C/V"
+    },
+    {
+        "tag": "L513",
+        "type": "Latch Relay",
+        "address": 513,
+        "comment": "AUTO_ M/C BEFORE C.V"
+    },
+    {
+        "tag": "L514",
+        "type": "Latch Relay",
+        "address": 514,
+        "comment": "ALL VFD RUN BIT"
+    },
+    {
+        "tag": "L515",
+        "type": "Latch Relay",
+        "address": 515,
+        "comment": "ALL VFD STOP BIT"
+    },
+    {
+        "tag": "L516",
+        "type": "Latch Relay",
+        "address": 516,
+        "comment": "AUTO_ SERVO_2 RUN BI"
+    },
+    {
+        "tag": "L518",
+        "type": "Latch Relay",
+        "address": 518,
+        "comment": "AUTO_SERVO_3 RUN BIT"
+    },
+    {
+        "tag": "L520",
+        "type": "Latch Relay",
+        "address": 520,
+        "comment": "AUTO_SERVO_2 RUN BIT"
+    },
+    {
+        "tag": "L521",
+        "type": "Latch Relay",
+        "address": 521,
+        "comment": "AUTO_SERVO_2 UL2 POS"
+    },
+    {
+        "tag": "L522",
+        "type": "Latch Relay",
+        "address": 522,
+        "comment": "AUTO_SERVO_3 RUN PD_"
+    },
+    {
+        "tag": "L523",
+        "type": "Latch Relay",
+        "address": 523,
+        "comment": "AUTO_SERVO_2 WC POS"
+    },
+    {
+        "tag": "L524",
+        "type": "Latch Relay",
+        "address": 524,
+        "comment": "AUTO_SERVO_2 U24A PO"
+    },
+    {
+        "tag": "L525",
+        "type": "Latch Relay",
+        "address": 525,
+        "comment": "AUTO_ SERVO_2 MODEL"
+    },
+    {
+        "tag": "L530",
+        "type": "Latch Relay",
+        "address": 530,
+        "comment": "PART OK BIT"
+    },
+    {
+        "tag": "L531",
+        "type": "Latch Relay",
+        "address": 531,
+        "comment": "BEE LABEL OK BIT"
+    },
+    {
+        "tag": "L532",
+        "type": "Latch Relay",
+        "address": 532,
+        "comment": "AUTO TAPING MISSING"
+    },
+    {
+        "tag": "L533",
+        "type": "Latch Relay",
+        "address": 533,
+        "comment": "AUTO_SERVO_3 WC POS"
+    },
+    {
+        "tag": "L534",
+        "type": "Latch Relay",
+        "address": 534,
+        "comment": "AUTO_SERVO_3 U24A PO"
+    },
+    {
+        "tag": "L535",
+        "type": "Latch Relay",
+        "address": 535,
+        "comment": "AUTO_ SERVO_3 MODEL"
+    },
+    {
+        "tag": "L550",
+        "type": "Latch Relay",
+        "address": 550,
+        "comment": "MOTOR"
+    },
+    {
+        "tag": "L551",
+        "type": "Latch Relay",
+        "address": 551,
+        "comment": "VFD_1 RUN FB"
+    },
+    {
+        "tag": "L552",
+        "type": "Latch Relay",
+        "address": 552,
+        "comment": "CENTRING FWD BIT"
+    },
+    {
+        "tag": "L553",
+        "type": "Latch Relay",
+        "address": 553,
+        "comment": "CENTRING FWD CNF BIT"
+    },
+    {
+        "tag": "L554",
+        "type": "Latch Relay",
+        "address": 554,
+        "comment": "CENTRING REV BIT"
+    },
+    {
+        "tag": "L555",
+        "type": "Latch Relay",
+        "address": 555,
+        "comment": "COMPLETE BIT"
+    },
+    {
+        "tag": "L556",
+        "type": "Latch Relay",
+        "address": 556,
+        "comment": "VFD_2 RUN"
+    },
+    {
+        "tag": "L557",
+        "type": "Latch Relay",
+        "address": 557,
+        "comment": "VFD 3 RUN"
+    },
+    {
+        "tag": "L600",
+        "type": "Latch Relay",
+        "address": 600,
+        "comment": "SERVO_1 POSTION CMPL"
+    },
+    {
+        "tag": "L602",
+        "type": "Latch Relay",
+        "address": 602,
+        "comment": "SERVO_2 POS_1 CMPLT"
+    },
+    {
+        "tag": "L604",
+        "type": "Latch Relay",
+        "address": 604,
+        "comment": "SERVO_2 POS_2 CMPLT"
+    },
+    {
+        "tag": "L606",
+        "type": "Latch Relay",
+        "address": 606,
+        "comment": "SERVO_3 POS_1 CMPLT"
+    },
+    {
+        "tag": "L608",
+        "type": "Latch Relay",
+        "address": 608,
+        "comment": "SERVO_3 POS_2 CMPLT"
+    },
+    {
+        "tag": "L700",
+        "type": "Latch Relay",
+        "address": 700,
+        "comment": "AXIS_1 SELECTED"
+    },
+    {
+        "tag": "L701",
+        "type": "Latch Relay",
+        "address": 701,
+        "comment": "AXIS_2 SELECTED"
+    },
+    {
+        "tag": "L702",
+        "type": "Latch Relay",
+        "address": 702,
+        "comment": "AXIS_3 SELECTED"
+    },
+    {
+        "tag": "L704",
+        "type": "Latch Relay",
+        "address": 704,
+        "comment": "SERVO_ORIGIN"
+    },
+    {
+        "tag": "L800",
+        "type": "Latch Relay",
+        "address": 800,
+        "comment": "UL2 MODEL SELECT"
+    },
+    {
+        "tag": "L802",
+        "type": "Latch Relay",
+        "address": 802,
+        "comment": "WN MODEL SELECT"
+    },
+    {
+        "tag": "L804",
+        "type": "Latch Relay",
+        "address": 804,
+        "comment": "WC MODEL SELECT"
+    },
+    {
+        "tag": "L806",
+        "type": "Latch Relay",
+        "address": 806,
+        "comment": "U24A MODEL SELECTED"
+    },
+    {
+        "tag": "L808",
+        "type": "Latch Relay",
+        "address": 808,
+        "comment": "MODEL 5 SELECTED"
+    },
+    {
+        "tag": "L810",
+        "type": "Latch Relay",
+        "address": 810,
+        "comment": "MODEL_6 SELECTED"
+    },
+    {
+        "tag": "L812",
+        "type": "Latch Relay",
+        "address": 812,
+        "comment": "MODEL_7 SELECTED"
+    },
+    {
+        "tag": "L814",
+        "type": "Latch Relay",
+        "address": 814,
+        "comment": "MODEL_8 SELECTED"
+    },
+    {
+        "tag": "L816",
+        "type": "Latch Relay",
+        "address": 816,
+        "comment": "MODEL_9 SELECTED"
+    },
+    {
+        "tag": "L818",
+        "type": "Latch Relay",
+        "address": 818,
+        "comment": "MODEL 10 SELECTED"
+    },
+    {
+        "tag": "L820",
+        "type": "Latch Relay",
+        "address": 820,
+        "comment": "MODEL 11 SELECTED"
+    },
+    {
+        "tag": "L822",
+        "type": "Latch Relay",
+        "address": 822,
+        "comment": "MODEL 12 SELECTED"
+    },
+    {
+        "tag": "L1000",
+        "type": "Latch Relay",
+        "address": 1000,
+        "comment": "CALL PB ON HMI"
+    },
+    {
+        "tag": "L1002",
+        "type": "Latch Relay",
+        "address": 1002,
+        "comment": "MANUAL CALL BIT"
+    },
+    {
+        "tag": "L1010",
+        "type": "Latch Relay",
+        "address": 1010,
+        "comment": "MANUAL CALL BIT"
+    },
+    {
+        "tag": "L2510",
+        "type": "Latch Relay",
+        "address": 2510,
+        "comment": "WRONG MODEL SELECTIO"
+    },
+    {
+        "tag": "X0",
+        "type": "Input",
+        "address": 0,
+        "comment": "QD77 READY"
+    },
+    {
+        "tag": "X1",
+        "type": "Input",
+        "address": 1,
+        "comment": "Synchronization flag"
+    },
+    {
+        "tag": "X4",
+        "type": "Input",
+        "address": 4,
+        "comment": "Ax#1 M code ON"
+    },
+    {
+        "tag": "X5",
+        "type": "Input",
+        "address": 5,
+        "comment": "Ax#2 M code ON"
+    },
+    {
+        "tag": "X6",
+        "type": "Input",
+        "address": 6,
+        "comment": "Ax#3 M code ON"
+    },
+    {
+        "tag": "X7",
+        "type": "Input",
+        "address": 7,
+        "comment": "Ax#4 M code ON"
+    },
+    {
+        "tag": "X8",
+        "type": "Input",
+        "address": 8,
+        "comment": "Ax#1 Error detection"
+    },
+    {
+        "tag": "X9",
+        "type": "Input",
+        "address": 9,
+        "comment": "Ax#2 Error detection"
+    },
+    {
+        "tag": "X10",
+        "type": "Input",
+        "address": 10,
+        "comment": "Ax#1 Start completed"
+    },
+    {
+        "tag": "X11",
+        "type": "Input",
+        "address": 11,
+        "comment": "Ax#2 Start completed"
+    },
+    {
+        "tag": "X12",
+        "type": "Input",
+        "address": 12,
+        "comment": "Ax#3 Start completed"
+    },
+    {
+        "tag": "X13",
+        "type": "Input",
+        "address": 13,
+        "comment": "Ax#4 Start completed"
+    },
+    {
+        "tag": "X14",
+        "type": "Input",
+        "address": 14,
+        "comment": "Ax#1 Positioning com"
+    },
+    {
+        "tag": "X15",
+        "type": "Input",
+        "address": 15,
+        "comment": "Ax#2 Positioning com"
+    },
+    {
+        "tag": "X16",
+        "type": "Input",
+        "address": 16,
+        "comment": "Ax#3 Positioning com"
+    },
+    {
+        "tag": "X17",
+        "type": "Input",
+        "address": 17,
+        "comment": "Ax#4 Positioning com"
+    },
+    {
+        "tag": "X20",
+        "type": "Input",
+        "address": 20,
+        "comment": "CYCLE START PB"
+    },
+    {
+        "tag": "X21",
+        "type": "Input",
+        "address": 21,
+        "comment": "CYCLE STOP PB"
+    },
+    {
+        "tag": "X22",
+        "type": "Input",
+        "address": 22,
+        "comment": "EMERGENCY PB"
+    },
+    {
+        "tag": "X23",
+        "type": "Input",
+        "address": 23,
+        "comment": "RESET PB"
+    },
+    {
+        "tag": "X24",
+        "type": "Input",
+        "address": 24,
+        "comment": "AUTO/MANUAL SSW"
+    },
+    {
+        "tag": "X25",
+        "type": "Input",
+        "address": 25,
+        "comment": "HOME PB"
+    },
+    {
+        "tag": "X26",
+        "type": "Input",
+        "address": 26,
+        "comment": "SERVO_1 FWD PROXY"
+    },
+    {
+        "tag": "X27",
+        "type": "Input",
+        "address": 27,
+        "comment": "SERVO_1 REV PROXY"
+    },
+    {
+        "tag": "X28",
+        "type": "Input",
+        "address": 28,
+        "comment": "SERVO_1 HOME PROXY"
+    },
+    {
+        "tag": "X29",
+        "type": "Input",
+        "address": 29,
+        "comment": "SERVO_2 FWD PROXY"
+    },
+    {
+        "tag": "X30",
+        "type": "Input",
+        "address": 30,
+        "comment": "DIFF SENSOR_2"
+    },
+    {
+        "tag": "X31",
+        "type": "Input",
+        "address": 31,
+        "comment": "ROBOT FB"
+    },
+    {
+        "tag": "X32",
+        "type": "Input",
+        "address": 32,
+        "comment": "DIFF SENSOR_4"
+    },
+    {
+        "tag": "X33",
+        "type": "Input",
+        "address": 33,
+        "comment": "CENTRING CYL FWD PRO"
+    },
+    {
+        "tag": "X34",
+        "type": "Input",
+        "address": 34,
+        "comment": "CENTRING CYL REV PRO"
+    },
+    {
+        "tag": "X35",
+        "type": "Input",
+        "address": 35,
+        "comment": "VFD_1 FAULT"
+    },
+    {
+        "tag": "X36",
+        "type": "Input",
+        "address": 36,
+        "comment": "VFD_2 FAULT"
+    },
+    {
+        "tag": "X37",
+        "type": "Input",
+        "address": 37,
+        "comment": "VFD_3 FAULT"
+    },
+    {
+        "tag": "X38",
+        "type": "Input",
+        "address": 38,
+        "comment": "AIR PRESSURE LOW"
+    },
+    {
+        "tag": "X39",
+        "type": "Input",
+        "address": 39,
+        "comment": "VFD_1 RUN FB"
+    },
+    {
+        "tag": "X60",
+        "type": "Input",
+        "address": 60,
+        "comment": "PART BEE LABEL OK"
+    },
+    {
+        "tag": "X61",
+        "type": "Input",
+        "address": 61,
+        "comment": "U24A MODEL PART SEN"
+    },
+    {
+        "tag": "X62",
+        "type": "Input",
+        "address": 62,
+        "comment": "UL2 MODEL PART SEN"
+    },
+    {
+        "tag": "X63",
+        "type": "Input",
+        "address": 63,
+        "comment": "INFEED VFD FAULT FB"
+    },
+    {
+        "tag": "Y0",
+        "type": "Output",
+        "address": 0,
+        "comment": "PLC READY"
+    },
+    {
+        "tag": "Y1",
+        "type": "Output",
+        "address": 1,
+        "comment": "All axes servo ON"
+    },
+    {
+        "tag": "Y4",
+        "type": "Output",
+        "address": 4,
+        "comment": "Ax#1 Axis stop"
+    },
+    {
+        "tag": "Y5",
+        "type": "Output",
+        "address": 5,
+        "comment": "Ax#2 Axis stop"
+    },
+    {
+        "tag": "Y6",
+        "type": "Output",
+        "address": 6,
+        "comment": "Ax#3 Axis stop"
+    },
+    {
+        "tag": "Y7",
+        "type": "Output",
+        "address": 7,
+        "comment": "Ax#4 Axis stop"
+    },
+    {
+        "tag": "Y8",
+        "type": "Output",
+        "address": 8,
+        "comment": "Ax#1 Forward rotatio"
+    },
+    {
+        "tag": "Y9",
+        "type": "Output",
+        "address": 9,
+        "comment": "Ax#1 Reverse rotatio"
+    },
+    {
+        "tag": "Y10",
+        "type": "Output",
+        "address": 10,
+        "comment": "Axis #1 Positioning"
+    },
+    {
+        "tag": "Y11",
+        "type": "Output",
+        "address": 11,
+        "comment": "Axis #2 Positioning"
+    },
+    {
+        "tag": "Y12",
+        "type": "Output",
+        "address": 12,
+        "comment": "Axis #3 Positioning"
+    },
+    {
+        "tag": "Y13",
+        "type": "Output",
+        "address": 13,
+        "comment": "Axis #4 Positioning"
+    },
+    {
+        "tag": "Y14",
+        "type": "Output",
+        "address": 14,
+        "comment": "Ax#1 Execution prohi"
+    },
+    {
+        "tag": "Y15",
+        "type": "Output",
+        "address": 15,
+        "comment": "Ax#2 Execution prohi"
+    },
+    {
+        "tag": "Y16",
+        "type": "Output",
+        "address": 16,
+        "comment": "Ax#3 Execution prohi"
+    },
+    {
+        "tag": "Y17",
+        "type": "Output",
+        "address": 17,
+        "comment": "Ax#4 Execution prohi"
+    },
+    {
+        "tag": "Y40",
+        "type": "Output",
+        "address": 40,
+        "comment": "VFD_1 FWD"
+    },
+    {
+        "tag": "Y41",
+        "type": "Output",
+        "address": 41,
+        "comment": "VFD_1 REV"
+    },
+    {
+        "tag": "Y42",
+        "type": "Output",
+        "address": 42,
+        "comment": "VFD_2 FWD"
+    },
+    {
+        "tag": "Y43",
+        "type": "Output",
+        "address": 43,
+        "comment": "VFD_2 REV"
+    },
+    {
+        "tag": "Y44",
+        "type": "Output",
+        "address": 44,
+        "comment": "VFD_3 FWD"
+    },
+    {
+        "tag": "Y45",
+        "type": "Output",
+        "address": 45,
+        "comment": "VFD_3 REV"
+    },
+    {
+        "tag": "Y46",
+        "type": "Output",
+        "address": 46,
+        "comment": "CENTRING CYL FWD"
+    },
+    {
+        "tag": "Y47",
+        "type": "Output",
+        "address": 47,
+        "comment": "CENTRING CYL REV"
+    },
+    {
+        "tag": "Y48",
+        "type": "Output",
+        "address": 48,
+        "comment": "CYCLE START LAMP"
+    },
+    {
+        "tag": "Y49",
+        "type": "Output",
+        "address": 49,
+        "comment": "EMG STOP LAMP"
+    },
+    {
+        "tag": "Y50",
+        "type": "Output",
+        "address": 50,
+        "comment": "TL GREEN LAMP"
+    },
+    {
+        "tag": "Y51",
+        "type": "Output",
+        "address": 51,
+        "comment": "TL YELLOW LAMP"
+    },
+    {
+        "tag": "Y52",
+        "type": "Output",
+        "address": 52,
+        "comment": "TL RED"
+    },
+    {
+        "tag": "Y53",
+        "type": "Output",
+        "address": 53,
+        "comment": "ROTARY BUZZER"
+    },
+    {
+        "tag": "Y54",
+        "type": "Output",
+        "address": 54,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "Y55",
+        "type": "Output",
+        "address": 55,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "Y56",
+        "type": "Output",
+        "address": 56,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "Y57",
+        "type": "Output",
+        "address": 57,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "Y58",
+        "type": "Output",
+        "address": 58,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "Y59",
+        "type": "Output",
+        "address": 59,
+        "comment": "SPARE"
+    },
+    {
+        "tag": "D0",
+        "type": "Data Register",
+        "address": 0,
+        "comment": "BASE SCREEN DATA"
+    },
+    {
+        "tag": "D50",
+        "type": "Data Register",
+        "address": 50,
+        "comment": "AXIS SELECTION DATA"
+    },
+    {
+        "tag": "D60",
+        "type": "Data Register",
+        "address": 60,
+        "comment": "UL2 TMR DATA FOR CEN"
+    },
+    {
+        "tag": "D80",
+        "type": "Data Register",
+        "address": 80,
+        "comment": "DATA FOR CENTRING FW"
+    },
+    {
+        "tag": "D100",
+        "type": "Data Register",
+        "address": 100,
+        "comment": "UL2 MODEL TMR"
+    },
+    {
+        "tag": "D102",
+        "type": "Data Register",
+        "address": 102,
+        "comment": "WN MODEL TMR"
+    },
+    {
+        "tag": "D104",
+        "type": "Data Register",
+        "address": 104,
+        "comment": "WC MODEL TMR"
+    },
+    {
+        "tag": "D106",
+        "type": "Data Register",
+        "address": 106,
+        "comment": "U24A MODEL TMR"
+    },
+    {
+        "tag": "D108",
+        "type": "Data Register",
+        "address": 108,
+        "comment": "MODEL_5 TMR"
+    },
+    {
+        "tag": "D110",
+        "type": "Data Register",
+        "address": 110,
+        "comment": "MODEL 6 TMR"
+    },
+    {
+        "tag": "D112",
+        "type": "Data Register",
+        "address": 112,
+        "comment": "MODEL_7 TMR"
+    },
+    {
+        "tag": "D114",
+        "type": "Data Register",
+        "address": 114,
+        "comment": "MODEL_8 TMR"
+    },
+    {
+        "tag": "D116",
+        "type": "Data Register",
+        "address": 116,
+        "comment": "MODEL_9 TMR"
+    },
+    {
+        "tag": "D118",
+        "type": "Data Register",
+        "address": 118,
+        "comment": "MODEL_10 TMR"
+    },
+    {
+        "tag": "D120",
+        "type": "Data Register",
+        "address": 120,
+        "comment": "MODEL 11 TMR"
+    },
+    {
+        "tag": "D122",
+        "type": "Data Register",
+        "address": 122,
+        "comment": "MODEL_12 TMR"
+    },
+    {
+        "tag": "D300",
+        "type": "Data Register",
+        "address": 300,
+        "comment": "UL2 SERVO PD_1"
+    },
+    {
+        "tag": "D306",
+        "type": "Data Register",
+        "address": 306,
+        "comment": "UL2 SERVO PD_2"
+    },
+    {
+        "tag": "D310",
+        "type": "Data Register",
+        "address": 310,
+        "comment": "WN MODEL PD_1"
+    },
+    {
+        "tag": "D316",
+        "type": "Data Register",
+        "address": 316,
+        "comment": "WN SERVO PD_2"
+    },
+    {
+        "tag": "D320",
+        "type": "Data Register",
+        "address": 320,
+        "comment": "WC SERVO PD_1"
+    },
+    {
+        "tag": "D326",
+        "type": "Data Register",
+        "address": 326,
+        "comment": "WC SERVO PD_2"
+    },
+    {
+        "tag": "D330",
+        "type": "Data Register",
+        "address": 330,
+        "comment": "U24A SERVO PD_1"
+    },
+    {
+        "tag": "D336",
+        "type": "Data Register",
+        "address": 336,
+        "comment": "U24A SERVO PD_2"
+    },
+    {
+        "tag": "D340",
+        "type": "Data Register",
+        "address": 340,
+        "comment": "MODEL_5 SERVO PD_1"
+    },
+    {
+        "tag": "D346",
+        "type": "Data Register",
+        "address": 346,
+        "comment": "MODEL_5 SERVO PD2"
+    },
+    {
+        "tag": "D350",
+        "type": "Data Register",
+        "address": 350,
+        "comment": "MODEL_6 SERVO PD_1"
+    },
+    {
+        "tag": "D356",
+        "type": "Data Register",
+        "address": 356,
+        "comment": "MODEL_6 SERVO PD_2"
+    },
+    {
+        "tag": "D360",
+        "type": "Data Register",
+        "address": 360,
+        "comment": "MODEL_7 SERVO PD_1"
+    },
+    {
+        "tag": "D366",
+        "type": "Data Register",
+        "address": 366,
+        "comment": "MODEL_7 SERVO PD_2"
+    },
+    {
+        "tag": "D370",
+        "type": "Data Register",
+        "address": 370,
+        "comment": "MODEL_8 SERVO PD_1"
+    },
+    {
+        "tag": "D376",
+        "type": "Data Register",
+        "address": 376,
+        "comment": "MODEL_8 SERVO PD_2"
+    },
+    {
+        "tag": "D380",
+        "type": "Data Register",
+        "address": 380,
+        "comment": "MODEL_9 SERVO PD_1"
+    },
+    {
+        "tag": "D386",
+        "type": "Data Register",
+        "address": 386,
+        "comment": "MODEL_9 SERVO PD_2"
+    },
+    {
+        "tag": "D390",
+        "type": "Data Register",
+        "address": 390,
+        "comment": "MODEL_10 SERVO PD_1"
+    },
+    {
+        "tag": "D396",
+        "type": "Data Register",
+        "address": 396,
+        "comment": "MODEL_10 SERVO PD_2"
+    },
+    {
+        "tag": "D400",
+        "type": "Data Register",
+        "address": 400,
+        "comment": "MODEL_11 SERVO PD_1"
+    },
+    {
+        "tag": "D406",
+        "type": "Data Register",
+        "address": 406,
+        "comment": "MODEL_11 SERVO PD_2"
+    },
+    {
+        "tag": "D410",
+        "type": "Data Register",
+        "address": 410,
+        "comment": "MODEL_12 SERVO PD_1"
+    },
+    {
+        "tag": "D416",
+        "type": "Data Register",
+        "address": 416,
+        "comment": "MODEL_12 SERVO PD_2"
+    },
+    {
+        "tag": "D500",
+        "type": "Data Register",
+        "address": 500,
+        "comment": "UL2 SERVO_2 PD_1"
+    },
+    {
+        "tag": "D506",
+        "type": "Data Register",
+        "address": 506,
+        "comment": "UL2 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D510",
+        "type": "Data Register",
+        "address": 510,
+        "comment": "WN SERVO_2 PD_1"
+    },
+    {
+        "tag": "D516",
+        "type": "Data Register",
+        "address": 516,
+        "comment": "WN SERVO_2 PD_2"
+    },
+    {
+        "tag": "D520",
+        "type": "Data Register",
+        "address": 520,
+        "comment": "WC SERVO_2 PD_1"
+    },
+    {
+        "tag": "D526",
+        "type": "Data Register",
+        "address": 526,
+        "comment": "WC SERVO_2 PD_2"
+    },
+    {
+        "tag": "D530",
+        "type": "Data Register",
+        "address": 530,
+        "comment": "U24A SERVO_2 PD_1"
+    },
+    {
+        "tag": "D536",
+        "type": "Data Register",
+        "address": 536,
+        "comment": "U24A SERVO PD_2"
+    },
+    {
+        "tag": "D540",
+        "type": "Data Register",
+        "address": 540,
+        "comment": "MODEL_5 SERVO_2 PD_1"
+    },
+    {
+        "tag": "D546",
+        "type": "Data Register",
+        "address": 546,
+        "comment": "MODEL_5 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D550",
+        "type": "Data Register",
+        "address": 550,
+        "comment": "MODEL_6 SERVO_2 PD_1"
+    },
+    {
+        "tag": "D556",
+        "type": "Data Register",
+        "address": 556,
+        "comment": "MODEL_6 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D560",
+        "type": "Data Register",
+        "address": 560,
+        "comment": "MODEL_7 SERVO PD_1"
+    },
+    {
+        "tag": "D566",
+        "type": "Data Register",
+        "address": 566,
+        "comment": "MODEL_7 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D570",
+        "type": "Data Register",
+        "address": 570,
+        "comment": "MODEL_8 SERVO_2 PD_1"
+    },
+    {
+        "tag": "D576",
+        "type": "Data Register",
+        "address": 576,
+        "comment": "MODEL_8 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D580",
+        "type": "Data Register",
+        "address": 580,
+        "comment": "MODEL_9 SERVO_2 PD_1"
+    },
+    {
+        "tag": "D586",
+        "type": "Data Register",
+        "address": 586,
+        "comment": "MODEL_9 SERVO_2 PD_2"
+    },
+    {
+        "tag": "D590",
+        "type": "Data Register",
+        "address": 590,
+        "comment": "MODEL_10 SERVO_2 PD_"
+    },
+    {
+        "tag": "D596",
+        "type": "Data Register",
+        "address": 596,
+        "comment": "MODEL_10 SERVO_2 PD_"
+    },
+    {
+        "tag": "D600",
+        "type": "Data Register",
+        "address": 600,
+        "comment": "MODEL_11 SERVO_2 PD_"
+    },
+    {
+        "tag": "D606",
+        "type": "Data Register",
+        "address": 606,
+        "comment": "MODEL_11 SERVO_2 PD_"
+    },
+    {
+        "tag": "D610",
+        "type": "Data Register",
+        "address": 610,
+        "comment": "MODEL_12 SERVO_2 PD_"
+    },
+    {
+        "tag": "D616",
+        "type": "Data Register",
+        "address": 616,
+        "comment": "MODEL_12 SERVO_2 PD_"
+    },
+    {
+        "tag": "D620",
+        "type": "Data Register",
+        "address": 620,
+        "comment": "WN SERVO_2 POS DATA"
+    },
+    {
+        "tag": "D630",
+        "type": "Data Register",
+        "address": 630,
+        "comment": "WN SERVO_2 SPEED DAT"
+    },
+    {
+        "tag": "D640",
+        "type": "Data Register",
+        "address": 640,
+        "comment": "WC SERVO_2 POS DATA"
+    },
+    {
+        "tag": "D650",
+        "type": "Data Register",
+        "address": 650,
+        "comment": "WC SERVO_2 SPEED DAT"
+    },
+    {
+        "tag": "D660",
+        "type": "Data Register",
+        "address": 660,
+        "comment": "U24A SERVO_2 POS DAT"
+    },
+    {
+        "tag": "D670",
+        "type": "Data Register",
+        "address": 670,
+        "comment": "U24A SERVO_2 SPEED D"
+    },
+    {
+        "tag": "D680",
+        "type": "Data Register",
+        "address": 680,
+        "comment": "MODEL_5 SERVO_2 POS"
+    },
+    {
+        "tag": "D690",
+        "type": "Data Register",
+        "address": 690,
+        "comment": "MODEL_5 SERVO_2 SPEE"
+    },
+    {
+        "tag": "D700",
+        "type": "Data Register",
+        "address": 700,
+        "comment": "UL2 MODEL SERVO_3 PD"
+    },
+    {
+        "tag": "D706",
+        "type": "Data Register",
+        "address": 706,
+        "comment": "UL2 MODEL SERVO_3 PD"
+    },
+    {
+        "tag": "D710",
+        "type": "Data Register",
+        "address": 710,
+        "comment": "WN MODEL SERVO_3 PD_"
+    },
+    {
+        "tag": "D716",
+        "type": "Data Register",
+        "address": 716,
+        "comment": "WN MODEL SERVO_3 PD_"
+    },
+    {
+        "tag": "D720",
+        "type": "Data Register",
+        "address": 720,
+        "comment": "WC MODEL SERVO_3 PD_"
+    },
+    {
+        "tag": "D726",
+        "type": "Data Register",
+        "address": 726,
+        "comment": "WC MODEL SERVO_3 PD_"
+    },
+    {
+        "tag": "D730",
+        "type": "Data Register",
+        "address": 730,
+        "comment": "U24A MODEL SERVO_3 P"
+    },
+    {
+        "tag": "D736",
+        "type": "Data Register",
+        "address": 736,
+        "comment": "U24A MODEL SERVO_3 P"
+    },
+    {
+        "tag": "D740",
+        "type": "Data Register",
+        "address": 740,
+        "comment": "MODEL_5 SERVO_3 PD_1"
+    },
+    {
+        "tag": "D746",
+        "type": "Data Register",
+        "address": 746,
+        "comment": "MODEL_5 SERVO_3 PD_2"
+    },
+    {
+        "tag": "D750",
+        "type": "Data Register",
+        "address": 750,
+        "comment": "MODEL_6 SERVO_3 PD_1"
+    },
+    {
+        "tag": "D756",
+        "type": "Data Register",
+        "address": 756,
+        "comment": "MODEL_6 SERVO_3 PD_2"
+    },
+    {
+        "tag": "D760",
+        "type": "Data Register",
+        "address": 760,
+        "comment": "MODEL_7 SERVO_3 PD_1"
+    },
+    {
+        "tag": "D766",
+        "type": "Data Register",
+        "address": 766,
+        "comment": "MODEL_7 SERVO_3 PD_2"
+    },
+    {
+        "tag": "D770",
+        "type": "Data Register",
+        "address": 770,
+        "comment": "MODEL_8 SERVO_3 PD_1"
+    },
+    {
+        "tag": "D776",
+        "type": "Data Register",
+        "address": 776,
+        "comment": "MODEL_8 SERVO_3 PD_2"
+    },
+    {
+        "tag": "D780",
+        "type": "Data Register",
+        "address": 780,
+        "comment": "MODEL_9 SERVO_3 PD_1"
+    },
+    {
+        "tag": "D786",
+        "type": "Data Register",
+        "address": 786,
+        "comment": "MODEL_9 SERVO_3 PD_2"
+    },
+    {
+        "tag": "D790",
+        "type": "Data Register",
+        "address": 790,
+        "comment": "MODEL_10 SERVO_3 PD_"
+    },
+    {
+        "tag": "D796",
+        "type": "Data Register",
+        "address": 796,
+        "comment": "MODEL_10 SERVO_3 PD_"
+    },
+    {
+        "tag": "D800",
+        "type": "Data Register",
+        "address": 800,
+        "comment": "MODEL_11 SERVO_3 PD_"
+    },
+    {
+        "tag": "D806",
+        "type": "Data Register",
+        "address": 806,
+        "comment": "MODEL_11 SERVO_3 PD_"
+    },
+    {
+        "tag": "D810",
+        "type": "Data Register",
+        "address": 810,
+        "comment": "MODEL_12 SERVO_3 PD_"
+    },
+    {
+        "tag": "D816",
+        "type": "Data Register",
+        "address": 816,
+        "comment": "MODEL_12 SERVO_3 PD_"
+    },
+    {
+        "tag": "D900",
+        "type": "Data Register",
+        "address": 900,
+        "comment": "SERVO_1 SPEED DATA"
+    },
+    {
+        "tag": "D910",
+        "type": "Data Register",
+        "address": 910,
+        "comment": "SERVO_2 SPEED DATA"
+    },
+    {
+        "tag": "D920",
+        "type": "Data Register",
+        "address": 920,
+        "comment": "SERVO_3 SPEED DATA"
+    },
+    {
+        "tag": "D940",
+        "type": "Data Register",
+        "address": 940,
+        "comment": "AXIS_1 ERROR NO."
+    },
+    {
+        "tag": "D942",
+        "type": "Data Register",
+        "address": 942,
+        "comment": "AXIS_2 ERROR NO."
+    },
+    {
+        "tag": "D944",
+        "type": "Data Register",
+        "address": 944,
+        "comment": "AXIS_3 ERROR NO."
+    },
+    {
+        "tag": "D1000",
+        "type": "Data Register",
+        "address": 1000,
+        "comment": "SERVO_1 POSTION DATA"
+    },
+    {
+        "tag": "D1010",
+        "type": "Data Register",
+        "address": 1010,
+        "comment": "SERVO_1 POSITION DAT"
+    },
+    {
+        "tag": "D1020",
+        "type": "Data Register",
+        "address": 1020,
+        "comment": "SERVO_2 POSITION DAT"
+    },
+    {
+        "tag": "D1030",
+        "type": "Data Register",
+        "address": 1030,
+        "comment": "SERVO_2 POSITION DAT"
+    },
+    {
+        "tag": "D1040",
+        "type": "Data Register",
+        "address": 1040,
+        "comment": "SERVO_3 POSITION DAT"
+    },
+    {
+        "tag": "D1050",
+        "type": "Data Register",
+        "address": 1050,
+        "comment": "SERVO_3 POSITION DAT"
+    },
+    {
+        "tag": "D1100",
+        "type": "Data Register",
+        "address": 1100,
+        "comment": "CURRENT VALUE OF AXI"
+    },
+    {
+        "tag": "D1110",
+        "type": "Data Register",
+        "address": 1110,
+        "comment": "CURRENT VALUE OF AXI"
+    },
+    {
+        "tag": "D1120",
+        "type": "Data Register",
+        "address": 1120,
+        "comment": "CURRENT VALUE OF AXI"
+    },
+    {
+        "tag": "D1800",
+        "type": "Data Register",
+        "address": 1800,
+        "comment": "CALL CMPLT"
+    },
+    {
+        "tag": "T100",
+        "type": "Timer",
+        "address": 100,
+        "comment": "TMR FOR CENTRING"
+    },
+    {
+        "tag": "T552",
+        "type": "Timer",
+        "address": 552,
+        "comment": "TMR FOR SERVO ORIGIN"
+    },
+    {
+        "tag": "T553",
+        "type": "Timer",
+        "address": 553,
+        "comment": "TMR FOR MODEL CALL"
+    }
+]

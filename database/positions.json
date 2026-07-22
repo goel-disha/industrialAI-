@@ -1,0 +1,20 @@
+[
+    {
+        "axis": 1,
+        "position_no": 1,
+        "position": 1000.0,
+        "speed": 0.0
+    },
+    {
+        "axis": 1,
+        "position_no": 2,
+        "position": 1000.0,
+        "speed": 0.0
+    },
+    {
+        "axis": 1,
+        "position_no": 11,
+        "position": 1000.0,
+        "speed": 0.0
+    }
+]

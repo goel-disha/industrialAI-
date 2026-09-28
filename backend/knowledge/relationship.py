@@ -1,6 +1,6 @@
 from backend.repositries.device_repositries import get_device
 from backend.repositries.program_repositry import get_programs
-from backend.repositries.motion_repositry import get_motion
+#from backend.repositries.motion_repositry import get_motion
 from backend.repositries.position_repositry import get_positions
 from backend.repositries.timer_repositry import get_timers
 from backend.repositries.statement_repositry import get_statements
@@ -36,9 +36,9 @@ def find_device_relationships(tag: str):
         relationships["programs"].append(program)
 
     
-    for motion in get_motion():
+    #for motion in get_motion():
 
-        relationships["motion"].append(motion)
+      #  relationships["motion"].append(motion)
 
     
     for position in get_positions():

@@ -1,91 +1,91 @@
-.live-monitor{
-
-    padding:20px;
-
-    background:#f4f6f8;
-
-    min-height:100vh;
-
+.live-monitor {
+  padding: 24px;
 }
 
-.live-title{
-
-    margin-bottom:20px;
-
-    color:#1f2937;
-
+.live-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
-.search-input{
-
-    width:320px;
-
-    padding:10px;
-
-    border:1px solid #ccc;
-
-    border-radius:6px;
-
-    margin-bottom:20px;
-
-    font-size:15px;
-
+.live-title {
+  font-size: 28px !important;
+  font-weight: 700 !important;
 }
 
-.live-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    background:white;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
+.live-subtitle {
+  opacity: 0.65;
+  margin-top: 4px !important;
 }
 
-.live-table th{
-
-    background:#1976d2;
-
-    color:white;
-
-    padding:12px;
-
-    text-align:left;
-
+.live-section {
+  margin-top: 20px;
 }
 
-.live-table td{
-
-    padding:10px;
-
-    border-bottom:1px solid #eee;
-
+.monitor-card,
+.live-card,
+.servo-monitor-card {
+  height: 100%;
 }
 
-.live-table tr:hover{
-
-    background:#f5f9ff;
-
+.monitor-card {
+  min-height: 120px;
 }
 
-.status-on{
-
-    color:green;
-
-    font-weight:bold;
-
+.monitor-value {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  margin-top: 12px !important;
 }
 
-.status-off{
+.card-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
 
-    color:red;
+.small-label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+}
 
-    font-weight:bold;
+.axis-value {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  margin-top: 6px !important;
+}
 
+.servo-monitor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.live-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.chip-success {
+  background: rgba(46, 125, 50, 0.15) !important;
+}
+
+.chip-danger {
+  background: rgba(211, 47, 47, 0.15) !important;
+}
+
+.chip-active {
+  background: rgba(25, 118, 210, 0.15) !important;
+}
+
+.chip-off {
+  opacity: 0.6;
+}
+
+.live-loading {
+  padding: 40px;
 }

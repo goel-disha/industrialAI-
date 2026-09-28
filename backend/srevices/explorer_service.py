@@ -1,67 +1,39 @@
 from backend.repositries.device_repositries import get_all_devices
-from backend.repositries.motion_repositry import get_motion
-from backend.repositries.position_repositry import get_positions
-from backend.repositries.program_repositry import get_programs
-from backend.repositries.timer_repositry import get_timers
-from backend.repositries.network_repositry import get_network
+from backend.repositries.engineering_repository import (
+    get_programs,
+    get_statements,
+    get_network,
+    get_timers,
+    get_servo_constants
+)
+from backend.repositries.motion_repositry import (
+    get_parameters,
+    get_registers
+)
 
+
+##############################################################
+# Engineering Explorer
+##############################################################
 
 def explorer():
 
     return {
 
-        "project": "AUTO_TAPPING",
+        "devices": get_all_devices(),
 
-        "folders":[
+        "programs": get_programs(),
 
-            {
+        "statements": get_statements(),
 
-                "name":"Devices",
+        "network": get_network(),
 
-                "count":len(get_all_devices())
+        "timers": get_timers(),
 
-            },
+        "motion_parameters": get_parameters(),
 
-            {
+        "motion_registers": get_registers(),
 
-                "name":"Programs",
-
-                "count":len(get_programs())
-
-            },
-
-            {
-
-                "name":"Motion",
-
-                "count":len(get_motion())
-
-            },
-
-            {
-
-                "name":"Positions",
-
-                "count":len(get_positions())
-
-            },
-
-            {
-
-                "name":"Timers",
-
-                "count":len(get_timers())
-
-            },
-
-            {
-
-                "name":"Network",
-
-                "count":len(get_network())
-
-            }
-
-        ]
+        "servo_constants": get_servo_constants()
 
     }

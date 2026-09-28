@@ -1,82 +1,169 @@
-from backend.repositries.device_repositries import get_all_devices
-from backend.repositries.motion_repositry import get_motion
-from backend.repositries.position_repositry import get_positions
-from backend.repositries.program_repositry import get_programs
-from backend.repositries.timer_repositry import get_timers
-from backend.repositries.network_repositry import get_network
+from backend.machine.plc_memory import plc
 from backend.machine.machine_engine import engine
-from backend.repositries.event_repositry import get_events
-from backend.repositries.live_repositry import get_all_live
+from backend.machine.auto_engine import auto
+from backend.machine.servo_engine import axis1, axis2, axis3
+from backend.machine.production_engine import production
 
 
 def dashboard():
 
-    devices = get_all_devices()
-    motion = get_motion()
-    positions = get_positions()
-    programs = get_programs()
-    timers = get_timers()
-    network = get_network()
-    latest_events = get_events(5)
-    live_values = get_all_live()
-
-    # Read machine data only once
-    machine_data = engine.dashboard()
-
     return {
+        # ======================================================
+        # Machine
+        # ======================================================
 
-        "project": "AUTO_TAPPING",
+        "machine": {
+            "state": engine.state,
+            "model": engine.current_model,
+            "scan_count": engine.scan_count,
 
-        "plc": "Mitsubishi",
+            "auto_mode": bool(
+                int(plc.read("M500") or 0)
+            ),
 
-        "devices": len(devices),
+            "cycle_running": production.cycle_running,
+            "cycle_complete": production.cycle_complete,
+        },
 
-        "programs": len(programs),
+        # ======================================================
+        # Safety
+        # ======================================================
 
-        "motion_parameters": len(motion),
+        "safety": {
+            "emergency": bool(
+                int(plc.read("M90") or 0)
+            ),
 
-        "positions": len(positions),
+            "air_fault": bool(
+                int(plc.read("M91") or 0)
+            ),
 
-        "timers": len(timers),
+            "safe": (
+                not int(plc.read("M90") or 0)
+                and not int(plc.read("M91") or 0)
+            ),
+        },
 
-        "network": len(network),
+        # ======================================================
+        # Servo
+        # ======================================================
 
-        "status": "Healthy",
+        "servo": {
 
-        "machine": machine_data["machine"],
+            "axis1": {
+                "position": axis1.position,
+                "target": axis1.target,
+                "busy": axis1.busy,
+                "complete": axis1.complete,
+            },
 
-        "state": machine_data["state"],
+            "axis2": {
+                "position": axis2.position,
+                "target": axis2.target,
+                "busy": axis2.busy,
+                "complete": axis2.complete,
+            },
 
-        "boxes_today": machine_data["boxes_today"],
+            "axis3": {
+                "position": axis3.position,
+                "target": axis3.target,
+                "busy": axis3.busy,
+                "complete": axis3.complete,
+            },
+        },
 
-        "good_boxes": machine_data["good_boxes"],
+        # ======================================================
+        # Centering
+        # ======================================================
 
-        "rejected_boxes": machine_data["rejected_boxes"],
+        "centering": {
+            "forward": bool(
+                int(plc.read("Y46") or 0)
+            ),
 
-        "current_cycle": machine_data["current_cycle"],
+            "reverse": bool(
+                int(plc.read("Y47") or 0)
+            ),
 
-        "cycle_time": machine_data["cycle_time"],
+            "forward_limit": bool(
+                int(plc.read("X33") or 0)
+            ),
 
-        "efficiency": machine_data["efficiency"],
+            "reverse_limit": bool(
+                int(plc.read("X34") or 0)
+            ),
 
-        "axis_position": machine_data["axis_position"],
+            "part_centered": bool(
+                int(plc.read("L509") or 0)
+            ),
+        },
 
-        "axis_speed": machine_data["axis_speed"],
+        # ======================================================
+        # Production
+        # ======================================================
 
-        "ready": machine_data["ready"],
+        "production": production.get_status(),
 
-        "busy": machine_data["busy"],
+        # ======================================================
+        # Position Registers
+        # ======================================================
 
-        "error": machine_data["error"],
+        "positions": {
+            "axis1": plc.read("D1100"),
+            "axis2": plc.read("D1110"),
+            "axis3": plc.read("D1120"),
+        },
 
-        "servo_on": machine_data["servo_on"],
+        # ======================================================
+        # Completion
+        # ======================================================
 
-        "updated_at": machine_data["updated_at"],
+        "completion": {
+            "axis1": bool(
+                int(plc.read("L610") or 0)
+            ),
 
-        "events": latest_events,
+            "axis2": bool(
+                int(plc.read("L611") or 0)
+            ),
 
-        "live": live_values,
+            "axis3": bool(
+                int(plc.read("L612") or 0)
+            ),
+        },
 
-        "running" : "yes"
+        # ======================================================
+        # Auto Sequence
+        # ======================================================
 
+        "sequence": {
+            "state": auto.state,
+            "model": auto.model,
+            "center_timer": auto.center_timer,
+            "center_travel": auto.center_travel,
+        },
+
+        # ======================================================
+        # Important PLC Inputs
+        # ======================================================
+
+        "inputs": {
+            "cycle_start": plc.read("X20"),
+            "cycle_stop": plc.read("X21"),
+            "reset": plc.read("X23"),
+
+            "part_entry": plc.read("X30"),
+
+            "center_forward": plc.read("X33"),
+            "center_reverse": plc.read("X34"),
+        },
+
+        # ======================================================
+        # Outputs
+        # ======================================================
+
+        "outputs": {
+            "center_forward": plc.read("Y46"),
+            "center_reverse": plc.read("Y47"),
+        },
     }

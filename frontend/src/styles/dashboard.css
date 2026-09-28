@@ -1,55 +1,482 @@
-.dashboard{
+.dashboard {
+  min-height: 100vh;
+  padding: 24px;
+  background: #f5f7fa;
+}
 
-    padding:20px;
+.dashboard-loading {
+  padding: 40px;
+}
 
-    background:#f4f6f8;
 
-    min-height:100vh;
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #172033;
+}
+
+.dashboard-subtitle {
+  margin-top: 4px !important;
+  color: #788397;
+  font-size: 13px !important;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.refresh-button {
+  background: white !important;
+}
+
+
+/* ==========================================================
+   STATUS CARDS
+   ========================================================== */
+
+.status-card {
+  border-radius: 12px !important;
+  border: 1px solid #e3e7ee;
+  box-shadow: none !important;
+  height: 100%;
+}
+
+.status-card.running {
+  border-left: 4px solid #1976d2;
+}
+
+.status-card.idle {
+  border-left: 4px solid #757575;
+}
+
+.status-card.danger {
+  border-left: 4px solid #d32f2f;
+}
+
+.status-card.normal {
+  border-left: 4px solid #455a64;
+}
+
+.status-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2f7;
+  color: #344054;
+}
+
+.status-value {
+  margin-top: 14px !important;
+  font-size: 23px !important;
+  font-weight: 700 !important;
+  color: #172033;
+}
+
+
+/* ==========================================================
+   CARDS
+   ========================================================== */
+
+.dashboard-card {
+  border-radius: 12px !important;
+  border: 1px solid #e3e7ee;
+  box-shadow: none !important;
+  height: 100%;
+}
+
+.dashboard-section {
+  margin-top: 16px !important;
+}
+
+.section-heading {
+  margin-bottom: 12px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #172033;
+}
+
+.section-title {
+  margin-bottom: 18px;
+}
+
+.card-title {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #172033;
+}
+
+.card-subtitle {
+  margin-top: 3px !important;
+  color: #87909f;
+  font-size: 12px !important;
+}
+
+.small-label {
+  color: #8993a4;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* ==========================================================
+   MACHINE SEQUENCE
+   ========================================================== */
+
+.sequence-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sequence-step {
+  min-width: 80px;
+  text-align: center;
+  color: #8a93a1;
+}
+
+.sequence-step.active {
+  color: #1976d2;
+}
+
+.sequence-step.complete {
+  color: #2e7d32;
+}
+
+.sequence-dot {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 7px;
+  border-radius: 50%;
+  border: 2px solid #d8dde5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sequence-step.active .sequence-dot {
+  border-color: #1976d2;
+  background: #eaf2ff;
+}
+
+.sequence-step.complete .sequence-dot {
+  border-color: #2e7d32;
+  background: #edf7ee;
+}
+
+.sequence-arrow {
+  color: #b0b7c2;
+  font-size: 20px !important;
+}
+
+.machine-state-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* ==========================================================
+   SAFETY
+   ========================================================== */
+
+.safety-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.center-status {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* ==========================================================
+   SERVO
+   ========================================================== */
+
+.servo-card {
+  border-radius: 12px !important;
+  border: 1px solid #e3e7ee;
+  box-shadow: none !important;
+}
+
+.servo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.servo-name {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+.servo-position {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22px;
+  margin-bottom: 16px;
+}
+
+.servo-value {
+  font-size: 27px !important;
+  font-weight: 700 !important;
+  margin-top: 3px !important;
+}
+
+.servo-target {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  margin-top: 8px !important;
+}
+
+.servo-progress {
+  height: 6px !important;
+  border-radius: 5px;
+}
+
+
+/* ==========================================================
+   PRODUCTION
+   ========================================================== */
+
+.production-metric {
+  padding: 14px;
+  background: #f8f9fb;
+  border: 1px solid #edf0f4;
+  border-radius: 9px;
+}
+
+.production-value {
+  margin-top: 6px !important;
+  font-size: 23px !important;
+  font-weight: 700 !important;
+}
+
+
+/* ==========================================================
+   SYSTEM INFO
+   ========================================================== */
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+
+/* ==========================================================
+   CONTROLS
+   ========================================================== */
+
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.control-start {
+  background: #2e7d32 !important;
+}
+
+.control-stop {
+  background: #ed6c02 !important;
+}
+
+.control-emergency {
+  background: #d32f2f !important;
+}
+
+.control-reset {
+  color: #344054 !important;
+  border-color: #b8c0cc !important;
+}
+
+
+/* ==========================================================
+   ALARMS
+   ========================================================== */
+
+.alarm-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0f4;
+  color: #d32f2f;
+}
+
+.alarm-title {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #333b48;
+}
+
+.alarm-time {
+  margin-top: 3px !important;
+  font-size: 11px !important;
+  color: #8993a4;
+}
+
+
+/* ==========================================================
+   EVENTS
+   ========================================================== */
+
+.event-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.event-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #607d8b;
+}
+
+.event-title {
+  font-size: 13px !important;
+  color: #333b48;
+}
+
+.event-time {
+  margin-top: 3px !important;
+  font-size: 11px !important;
+  color: #8993a4;
+}
+
+
+/* ==========================================================
+   EMPTY
+   ========================================================== */
+
+.empty-state {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #7b8492;
+}
+
+
+/* ==========================================================
+   CHIPS
+   ========================================================== */
+
+.chip-success {
+  background: #e9f6ec !important;
+  color: #24733a !important;
+}
+
+.chip-danger {
+  background: #fdecec !important;
+  color: #c62828 !important;
+}
+
+.chip-warning {
+  background: #fff4e5 !important;
+  color: #b85c00 !important;
+}
+
+.chip-active {
+  background: #e8f1ff !important;
+  color: #1565c0 !important;
+}
+
+.chip-off {
+  background: #f0f2f5 !important;
+  color: #7b8492 !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .sequence-container {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .sequence-arrow {
+    flex-shrink: 0;
+  }
+
+  .machine-state-row {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 
 }
 
-.top-grid{
+@media (max-width: 600px) {
 
-    display:grid;
+  .dashboard-header {
+    flex-direction: column;
+  }
 
-    grid-template-columns:repeat(3,1fr);
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
 
-    gap:20px;
+  .control-panel {
+    flex-direction: column;
+  }
 
-    margin-top:20px;
-
-}
-
-.panel{
-
-    background:white;
-
-    border-radius:10px;
-
-    padding:20px;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-td{
-
-    padding:8px;
-
-    border-bottom:1px solid #ececec;
-
-}
-
-h2{
-
-    margin-bottom:15px;
+  .control-panel button {
+    width: 100%;
+  }
 
 }

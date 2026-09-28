@@ -1,45 +1,42 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar(){
+export default function Sidebar() {
+  return (
+    <aside className="sidebar">
 
-    return(
+      <NavLink to="/dashboard">
+        Dashboard
+      </NavLink>
 
-        <div className="sidebar">
+      <NavLink to="/live">
+        Live Monitor
+      </NavLink>
 
-            <h2>IndustrialAI</h2>
+      <NavLink to="/analytics">
+        Analytics
+      </NavLink>
 
-            <NavLink to="/">
+      <NavLink to="/engineering">
+        Engineering
+      </NavLink>
 
-                Dashboard
+      <NavLink to="/explorer">
+        Explorer
+      </NavLink>
 
-            </NavLink>
+      <NavLink to="/alarms">
+        Alarms
+      </NavLink>
 
-            <NavLink to="/live">
+      <NavLink to="/search">
+        Search
+      </NavLink>
 
-                Live Monitor
+      <NavLink to="/assistant">
+        AI Assistant
+      </NavLink>
 
-            </NavLink>
-
-            <NavLink to="/explorer">
-
-                Explorer
-
-            </NavLink>
-
-            <NavLink to="/analytics">
-
-                Analytics
-
-            </NavLink>
-
-            <NavLink to="/ai">
-
-                AI Assistant
-
-            </NavLink>
-
-        </div>
-
-    );
-
+    </aside>
+  );
 }

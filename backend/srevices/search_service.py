@@ -1,27 +1,50 @@
-from backend.repositries.device_repositries import search_device
-from backend.repositries.program_repositry import search_program
-from backend.repositries.motion_repositry import search_motion
-from backend.repositries.position_repositry import search_position
-from backend.repositries.timer_repositry import search_timer
-from backend.repositries.statement_repositry import search_statement
-from backend.repositries.network_repositry import search_network
+from backend.repositries.device_repositries import search_devices
+from backend.repositries.engineering_repository import search_engineering
+from backend.repositries.motion_repositry import (
+    get_parameters,
+    get_registers
+)
+
+
+##############################################################
+# Global Search
+##############################################################
 
 def search(keyword):
 
+    engineering = search_engineering(keyword)
+
+    devices = search_devices(keyword)
+
+    parameter_result = [
+        p for p in get_parameters()
+        if keyword.lower() in str(p["parameter"]).lower()
+        or keyword.lower() in str(p["description"]).lower()
+    ]
+
+    register_result = [
+        r for r in get_registers()
+        if keyword.lower() in str(r["address"]).lower()
+        or keyword.lower() in str(r["name"]).lower()
+        or keyword.lower() in str(r["comment"]).lower()
+    ]
+
     return {
 
-        "devices": search_device(keyword),
+        "devices": devices,
 
-        "motion": search_motion(keyword),
+        "programs": engineering["programs"],
 
-        "positions": search_position(keyword),
+        "statements": engineering["statements"],
 
-        "timers": search_timer(keyword),
+        "network": engineering["network"],
 
-        "programs": search_program(keyword),
+        "timers": engineering["timers"],
 
-        "statements": search_statement(keyword),
+        "servo_constants": engineering["servo_constants"],
 
-        "network": search_network(keyword)
+        "motion_parameters": parameter_result,
+
+        "motion_registers": register_result
 
     }

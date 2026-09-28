@@ -1,0 +1,115 @@
+{
+  "dataset": {
+    "samples": 6000,
+    "features": 25,
+    "classes": [
+      "NORMAL",
+      "SERVO_LAG",
+      "VIBRATION",
+      "STUCK_AXIS",
+      "SENSOR_NOISE",
+      "CYCLE_DEGRADATION"
+    ]
+  },
+  "anomaly_detection": {
+    "precision": 0.9853603603603603,
+    "recall": 0.875,
+    "f1": 0.926906779661017
+  },
+  "fault_classification": {
+    "accuracy": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_weighted": 1.0,
+    "confusion_matrix": [
+      [
+        200,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        200,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        200,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        200,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        200,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        200
+      ]
+    ],
+    "classes": [
+      "CYCLE_DEGRADATION",
+      "NORMAL",
+      "SENSOR_NOISE",
+      "SERVO_LAG",
+      "STUCK_AXIS",
+      "VIBRATION"
+    ]
+  },
+  "next_cycle_duration_regression": {
+    "mae_seconds": 0.301006846558948,
+    "rmse_seconds": 0.4924741570778043,
+    "r2": 0.8489092270503235,
+    "target": "next_cycle_duration",
+    "input_features": [
+      "busy_ratio",
+      "state_transitions",
+      "servo_error_count",
+      "a1_mean_pos_error",
+      "a1_max_pos_error",
+      "a1_std_pos_error",
+      "a1_mean_speed",
+      "a1_mean_actual_speed",
+      "a1_speed_deviation",
+      "a1_position_std",
+      "a2_mean_pos_error",
+      "a2_max_pos_error",
+      "a2_std_pos_error",
+      "a2_mean_speed",
+      "a2_mean_actual_speed",
+      "a2_speed_deviation",
+      "a2_position_std",
+      "a3_mean_pos_error",
+      "a3_max_pos_error",
+      "a3_std_pos_error",
+      "a3_mean_speed",
+      "a3_mean_actual_speed",
+      "a3_speed_deviation",
+      "a3_position_std"
+    ]
+  }
+}

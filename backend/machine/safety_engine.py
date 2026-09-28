@@ -3,38 +3,98 @@ from backend.machine.plc_memory import plc
 
 class SafetyEngine:
 
-    def update(self):
+    def __init__(self):
 
-        # Emergency PB
+        self.machine_ready = False
 
-        if plc.read("X22"):
+    ##############################################################
+    # Emergency Stop
+    ##############################################################
 
-            plc.write("M90", 1)
+    def emergency(self):
 
-        # Air Pressure Low
+        emergency = int(plc.read("M90") or 0)
 
-        if plc.read("X3D"):
+        if emergency:
 
-            plc.write("M91", 1)
+            plc.write("L501", 0)
+            plc.write("L502", 0)
+            plc.write("L1031", 0)
+            plc.write("L1032", 0)
 
-        # Reset PB
+            return False
 
-        if plc.read("X23"):
+        return True
 
-            plc.write("M90", 0)
+    ##############################################################
+    # Air Pressure
+    ##############################################################
 
-            plc.write("M91", 0)
+    def air_pressure(self):
 
-    #########################
+        pressure_fault = int(plc.read("M91") or 0)
 
-    def safe(self):
+        if pressure_fault:
+
+            plc.write("L501", 0)
+
+            return False
+
+        return True
+
+    ##############################################################
+    # Servo Ready
+    ##############################################################
+
+    def servo_ready(self):
+
+        ready = int(plc.read("M500") or 0)
+
+        return ready == 1
+
+    ##############################################################
+    # Home Complete
+    ##############################################################
+
+    def home_complete(self):
 
         return (
 
-            plc.read("M90") == 0 and
-            plc.read("M91") == 0
+            int(plc.read("L610") or 0)
+
+            and
+
+            int(plc.read("L611") or 0)
+
+            and
+
+            int(plc.read("L612") or 0)
 
         )
+
+    ##############################################################
+    # Complete Safety Scan
+    ##############################################################
+
+    def scan(self):
+
+        self.machine_ready = (
+
+            self.emergency()
+
+            and
+
+            self.air_pressure()
+
+            and
+
+            self.servo_ready()
+
+        )
+
+        plc.write("M1000", int(self.machine_ready))
+
+        return self.machine_ready
 
 
 safety = SafetyEngine()

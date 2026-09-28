@@ -1,36 +1,113 @@
-from backend.machine.motion_controller import motion
+from backend.machine.plc_memory import plc
+from backend.machine.machine_engine import engine
+from backend.machine.auto_engine import auto
 from backend.machine.production_engine import production
-from backend.machine.servo_engine import servo
 
 
-def status():
+# ==========================================================
+# Machine Status
+# ==========================================================
+
+def machine():
+
+    emergency = bool(
+        int(plc.read("M90") or 0)
+    )
+
+    air_fault = bool(
+        int(plc.read("M91") or 0)
+    )
+
+    auto_mode = bool(
+        int(plc.read("M500") or 0)
+    )
 
     return {
 
-        "machine": "AUTO TAPPING",
+        "state": engine.state,
 
-        "state": motion.state.name,
+        "model": engine.current_model,
 
-        "ready": motion.ready,
+        "auto_mode": auto_mode,
 
-        "busy": motion.busy,
+        "cycle_running":
+            production.cycle_running,
 
-        "error": motion.error,
+        "cycle_complete":
+            production.cycle_complete,
 
-        "servo_on": motion.servo_on,
+        "safety": {
 
-        "boxes_today": production.boxes_today,
+            "emergency": emergency,
 
-        "good_boxes": production.good_boxes,
+            "air_fault": air_fault,
 
-        "rejected_boxes": production.rejected_boxes,
+            "safe":
+                not emergency
+                and not air_fault
 
-        "current_cycle": production.current_cycle,
+        },
 
-        "average_cycle_time": production.average_cycle_time,
+        "sequence": {
 
-        "efficiency": production.efficiency(),
+            "state": auto.state,
 
-        "servo": servo.status()
+            "center_timer":
+                auto.center_timer,
+
+            "center_travel":
+                auto.center_travel
+
+        }
+
+    }
+
+
+# ==========================================================
+# Machine Events
+# ==========================================================
+
+def events():
+
+    return {
+
+        "cycle": {
+
+            "total":
+                production.total_cycles,
+
+            "completed":
+                production.completed_cycles,
+
+            "rejected":
+                production.rejected_cycles,
+
+            "current":
+                production.current_cycle
+
+        },
+
+        "machine": {
+
+            "state":
+                engine.state,
+
+            "model":
+                engine.current_model
+
+        },
+
+        "servo": {
+
+            "axis1_complete":
+                bool(int(plc.read("L610") or 0)),
+
+            "axis2_complete":
+                bool(int(plc.read("L611") or 0)),
+
+            "axis3_complete":
+                bool(int(plc.read("L612") or 0))
+
+        }
 
     }

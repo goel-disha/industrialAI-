@@ -1,130 +1,112 @@
-from datetime import datetime
+from backend.machine.plc_memory import plc
 
 
 class ProductionEngine:
 
     def __init__(self):
 
-        self.boxes_today = 0
-
-        self.good_boxes = 0
-
-        self.rejected_boxes = 0
+        self.total_cycles = 0
+        self.completed_cycles = 0
+        self.rejected_cycles = 0
 
         self.current_cycle = 0
+        self.cycle_running = False
+        self.cycle_complete = False
 
-        self.total_cycle_time = 0.0
+        self.previous_state = "IDLE"
 
-        self.average_cycle_time = 0.0
+    # ==========================================================
+    # Start Cycle
+    # ==========================================================
 
-        self.machine_start = datetime.now()
+    def start_cycle(self):
 
-        self.last_cycle_start = datetime.now()
+        if not self.cycle_running:
 
-        self.machine_running = True
+            self.cycle_running = True
+            self.cycle_complete = False
 
-    ########################################################
+            self.current_cycle += 1
+            self.total_cycles += 1
 
-    def cycle_started(self):
+    # ==========================================================
+    # Complete Cycle
+    # ==========================================================
 
-        self.last_cycle_start = datetime.now()
+    def complete_cycle(self):
 
-    ########################################################
+        if self.cycle_running:
 
-    def cycle_finished(self):
+            self.cycle_running = False
+            self.cycle_complete = True
 
-        self.current_cycle += 1
+            self.completed_cycles += 1
 
-        self.boxes_today += 1
+    # ==========================================================
+    # Reject Cycle
+    # ==========================================================
 
-        self.good_boxes += 1
+    def reject_cycle(self):
 
-        cycle = (
+        if self.cycle_running:
 
-            datetime.now() -
+            self.cycle_running = False
+            self.cycle_complete = True
 
-            self.last_cycle_start
+            self.rejected_cycles += 1
 
-        ).total_seconds()
+    # ==========================================================
+    # Update
+    # ==========================================================
 
-        self.total_cycle_time += cycle
+    def update(self, machine_state):
 
-        self.average_cycle_time = (
+        # New cycle started
+        if (
+            machine_state != "IDLE"
+            and self.previous_state == "IDLE"
+        ):
+            self.start_cycle()
 
-            self.total_cycle_time /
+        # Cycle completed
+        elif (
+            machine_state == "IDLE"
+            and self.previous_state != "IDLE"
+            and self.cycle_running
+        ):
+            self.complete_cycle()
 
-            self.current_cycle
+        self.previous_state = machine_state
 
-        )
+    # ==========================================================
+    # Reset
+    # ==========================================================
 
-    ########################################################
+    def reset(self):
 
-    def reject_box(self):
+        self.total_cycles = 0
+        self.completed_cycles = 0
+        self.rejected_cycles = 0
 
-        self.rejected_boxes += 1
+        self.current_cycle = 0
+        self.cycle_running = False
+        self.cycle_complete = False
 
-    ########################################################
+        self.previous_state = "IDLE"
 
-    def uptime(self):
+    # ==========================================================
+    # Dashboard Data
+    # ==========================================================
 
-        return (
-
-            datetime.now() -
-
-            self.machine_start
-
-        ).total_seconds()
-
-    ########################################################
-
-    def efficiency(self):
-
-        total = self.good_boxes + self.rejected_boxes
-
-        if total == 0:
-
-            return 100
-
-        return round(
-
-            (self.good_boxes / total) * 100,
-
-            2
-
-        )
-
-    ########################################################
-
-    def summary(self):
+    def get_status(self):
 
         return {
-
-            "boxes_today": self.boxes_today,
-
-            "good_boxes": self.good_boxes,
-
-            "rejected_boxes": self.rejected_boxes,
-
+            "total_cycles": self.total_cycles,
+            "completed_cycles": self.completed_cycles,
+            "rejected_cycles": self.rejected_cycles,
             "current_cycle": self.current_cycle,
-
-            "average_cycle_time": round(
-
-                self.average_cycle_time,
-
-                2
-
-            ),
-
-            "uptime": round(
-
-                self.uptime(),
-
-                1
-
-            ),
-
-            "efficiency": self.efficiency()
-
+            "cycle_running": self.cycle_running,
+            "cycle_complete": self.cycle_complete,
         }
 
 

@@ -1,57 +1,45 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Sidebar from "./components/sidebar";
-import Topbar from "./components/toolbar";
+import Layout from "./components/layout";
 
 import Dashboard from "./pages/dashboard";
-import Explorer from "./pages/explorer";
-import LiveMonitor from "./pages/livemonitor";
+import Live from "./pages/livemonitor";
 import Analytics from "./pages/analytics";
-import AIAssistant from "./pages/aiassistant";
+import Engineering from "./pages/engineering";
+import Explorer from "./pages/explorer";
+import Alarms from "./pages/alarm";
+import Search from "./pages/search";
+import Assistant from "./pages/assistant";
 
 function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
 
-    return (
+        <Route path="/" element={<Layout />}>
 
-        <BrowserRouter>
+          <Route index element={<Navigate to="/dashboard" replace />} />
 
-            <div style={{ display: "flex", height: "100vh" }}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="live" element={<Live />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="engineering" element={<Engineering />} />
+          <Route path="explorer" element={<Explorer />} />
+          <Route path="alarms" element={<Alarms />} />
+          <Route path="search" element={<Search />} />
+          <Route path="assistant" element={<Assistant />} />
 
-                <Sidebar />
+          <Route
+            path="*"
+            element={<Navigate to="/dashboard" replace />}
+          />
 
-                <div style={{ flex: 1 }}>
+        </Route>
 
-                    <Topbar />
-
-                    <div
-                        style={{
-                            padding: 25,
-                            height: "calc(100vh - 70px)",
-                            overflowY: "auto",
-                            background: "#f4f6f8"
-                        }}
-                    >
-
-                        <Routes>
-
-                            <Route path="/" element={<Dashboard />} />
-                            <Route path="/live" element={<LiveMonitor />} />
-                            <Route path="/explorer" element={<Explorer />} />
-                            <Route path="/analytics" element={<Analytics />} />
-                            <Route path="/ai" element={<AIAssistant />} />
-
-                        </Routes>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </BrowserRouter>
-
-    );
-
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

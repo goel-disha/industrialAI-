@@ -33,94 +33,60 @@ from .config import *
 # ---------------------------------------------------------
 
 def generate(n=1000):
-
     r = np.random.default_rng(RANDOM_STATE)
-
     rows = []
 
     for label in FAULT_CLASSES:
-
         for _ in range(n):
-
             d = {
-                "cycle_duration": max(5, r.normal(7.6, 0.08)),
-                "busy_ratio": r.normal(0.8, 0.025),
-                "state_transitions": r.normal(6, 0.3),
+                "cycle_duration": max(5.0, r.normal(7.6, 0.08)),
+                "busy_ratio": np.clip(r.normal(0.80, 0.025), 0.0, 1.0),
+                "state_transitions": max(0.0, r.normal(6, 0.3)),
                 "servo_error_count": 0.0,
             }
 
             for p in ("a1", "a2", "a3"):
-
-                d[f"{p}_mean_pos_error"] = abs(r.normal(80, 20))
-                d[f"{p}_max_pos_error"] = abs(r.normal(180, 45))
-                d[f"{p}_std_pos_error"] = abs(r.normal(55, 15))
-
-                d[f"{p}_mean_speed"] = r.normal(9000, 300)
-                d[f"{p}_mean_actual_speed"] = r.normal(8950, 300)
-
-                d[f"{p}_speed_deviation"] = abs(
-                    r.normal(0.04, 0.015)
-                )
-
-                d[f"{p}_position_std"] = abs(
-                    r.normal(250, 70)
-                )
-
-            # ---------------------------------------------
-            # Controlled fault injection
-            # ---------------------------------------------
+                d[f"{p}_mean_pos_error"] = abs(r.normal(0.015, 0.004))
+                d[f"{p}_max_pos_error"] = abs(r.normal(0.040, 0.010))
+                d[f"{p}_std_pos_error"] = abs(r.normal(0.012, 0.004))
+                d[f"{p}_mean_speed"] = 1.0
+                d[f"{p}_mean_actual_speed"] = np.clip(r.normal(0.995, 0.015), 0.0, 1.1)
+                d[f"{p}_speed_deviation"] = abs(r.normal(0.02, 0.008))
+                d[f"{p}_position_std"] = abs(r.normal(0.015, 0.004))
 
             if label == "SERVO_LAG":
-
-                d["a2_mean_actual_speed"] *= 0.55
+                d["a2_mean_actual_speed"] = np.clip(r.uniform(0.35, 0.65), 0.0, 1.0)
                 d["a2_speed_deviation"] = r.uniform(0.35, 0.65)
-
                 d["a2_mean_pos_error"] *= 2.2
                 d["a2_max_pos_error"] *= 2.5
-
                 d["cycle_duration"] *= r.uniform(1.08, 1.20)
 
             elif label == "VIBRATION":
-
                 d["a2_position_std"] *= 4
                 d["a3_position_std"] *= 3
-
                 d["a2_std_pos_error"] *= 3
                 d["a3_std_pos_error"] *= 2.5
 
             elif label == "STUCK_AXIS":
-
-                d["a3_mean_actual_speed"] *= 0.05
+                d["a3_mean_actual_speed"] = r.uniform(0.01, 0.05)
                 d["a3_speed_deviation"] = r.uniform(0.85, 1.0)
-
                 d["a3_mean_pos_error"] *= 5
                 d["a3_max_pos_error"] *= 6
-
                 d["cycle_duration"] *= r.uniform(1.25, 1.55)
 
             elif label == "SENSOR_NOISE":
-
                 for p in ("a1", "a2", "a3"):
-
                     d[f"{p}_position_std"] *= 5
                     d[f"{p}_std_pos_error"] *= 4
 
             elif label == "CYCLE_DEGRADATION":
-
                 d["cycle_duration"] *= r.uniform(1.20, 1.45)
-
-                d["busy_ratio"] = min(
-                    0.98,
-                    d["busy_ratio"] + 0.08
-                )
+                d["busy_ratio"] = min(0.98, d["busy_ratio"] + 0.08)
 
             d["label"] = label
-
             rows.append(d)
 
-    return pd.DataFrame(
-        rows
-    )[FEATURE_COLUMNS + ["label"]]
+    return pd.DataFrame(rows)[FEATURE_COLUMNS + ["label"]]
 
 
 # ---------------------------------------------------------

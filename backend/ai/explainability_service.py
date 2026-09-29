@@ -40,7 +40,7 @@ class ExplainabilityService:
                 values.append({
                     "feature": FEATURE_COLUMNS[int(i)],
                     "impact": round(float(contributions[int(i)]), 6),
-                    "direction": "increases_risk" if contributions[int(i)] > 0 else "reduces_risk",
+                    "direction": "supports_predicted_class" if contributions[int(i)] > 0 else "opposes_predicted_class",
                     "value": round(float(X.iloc[0, int(i)]), 6),
                 })
         except Exception:

@@ -277,17 +277,16 @@ def train_all(samples_per_class=1000):
 
     regression_df = df.copy()
 
-    X_reg_current = regression_df[
-        regression_features
-    ].copy()
+    # Build previous -> next cycle pairs within each fault class.
+    # Never pair the last cycle of one class with the first cycle
+    # of another class.
+    regression_df["next_cycle_duration"] = (
+        regression_df.groupby("label")["cycle_duration"].shift(-1)
+    )
+    regression_df = regression_df.dropna(subset=["next_cycle_duration"])
 
-    y_reg_next = regression_df[
-        "cycle_duration"
-    ].shift(-1)
-
-    # Remove the final row because it has no next cycle.
-    X_reg_current = X_reg_current.iloc[:-1]
-    y_reg_next = y_reg_next.iloc[:-1]
+    X_reg_current = regression_df[regression_features].copy()
+    y_reg_next = regression_df["next_cycle_duration"].copy()
 
     Xrt, Xrv, yrt, yrv = train_test_split(
         X_reg_current,

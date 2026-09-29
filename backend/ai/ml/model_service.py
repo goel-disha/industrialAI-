@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from .config import ARTIFACT_DIR, FEATURE_COLUMNS
+from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FEATURE_SCHEMA_VERSION
 from .features import cycle_to_features
 from .ensemble import ensemble
 from .xgb_service import xgb_service
@@ -34,17 +34,20 @@ class MLModelService:
         xgb_service.reload()
         metrics_path = ARTIFACT_DIR / "metrics.json"
         self.metrics = json.loads(metrics_path.read_text()) if metrics_path.exists() else {}
+        metadata_path = ARTIFACT_DIR / "metadata.json"
+        self.metadata = json.loads(metadata_path.read_text()) if metadata_path.exists() else {}
+        self.schema_compatible = self.metadata.get("feature_schema_version") == FEATURE_SCHEMA_VERSION
 
     def status(self):
         return {
             "ready": self.ready,
             "features": FEATURE_COLUMNS,
             "models": {
-                "anomaly_detection": self.ready,
-                "random_forest_fault_classifier": self.ready,
+                "anomaly_detection": self.ready and self.schema_compatible,
+                "random_forest_fault_classifier": self.ready and self.schema_compatible,
                 "xgboost_fault_classifier": xgb_service.ready,
-                "next_cycle_duration": self.ready,
-                "explainability": self.ready,
+                "next_cycle_duration": self.ready and self.schema_compatible,
+                "explainability": self.ready and self.schema_compatible,
             },
         }
 
@@ -81,6 +84,11 @@ class MLModelService:
     def predict_features(self, features, context=None):
         if not self.ready:
             raise RuntimeError("ML models are not trained.")
+        if not self.schema_compatible:
+            raise RuntimeError(
+                "ML artifacts use an incompatible feature schema. "
+                "Retrain with: python -m backend.ai.ml.train"
+            )
 
         features = {column: float(features.get(column, 0.0)) for column in FEATURE_COLUMNS}
         X = pd.DataFrame(
@@ -137,6 +145,24 @@ class MLModelService:
         rows = self.get_latest_cycle()
         if not rows:
             raise RuntimeError("No telemetry available for ML inference.")
+
+        cycle_numbers = [
+            int((row.get("cycle") or {}).get("number", 0))
+            for row in rows
+            if (row.get("cycle") or {}).get("number")
+        ]
+        if not cycle_numbers:
+            raise RuntimeError("No cycle telemetry available for ML inference.")
+
+        latest_cycle = max(cycle_numbers)
+        latest_rows = [
+            row for row in rows
+            if int((row.get("cycle") or {}).get("number", 0)) == latest_cycle
+        ]
+        if not latest_rows or not bool((latest_rows[-1].get("cycle") or {}).get("complete")):
+            raise RuntimeError(
+                "Latest cycle is still running. ML diagnosis is available after cycle completion."
+            )
 
         features, _, _ = self.build_features(rows)
 

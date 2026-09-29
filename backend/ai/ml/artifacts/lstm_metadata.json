@@ -1,0 +1,14 @@
+{
+  "accuracy": 0.9974979149291076,
+  "f1_weighted": 0.9974979149291076,
+  "sequence_length": 10,
+  "epochs": 15,
+  "classes": [
+    "NORMAL",
+    "SERVO_LAG",
+    "VIBRATION",
+    "STUCK_AXIS",
+    "SENSOR_NOISE",
+    "CYCLE_DEGRADATION"
+  ]
+}

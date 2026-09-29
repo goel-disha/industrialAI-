@@ -1,0 +1,22 @@
+{
+  "class_to_id": {
+    "CYCLE_DEGRADATION": 0,
+    "NORMAL": 1,
+    "SENSOR_NOISE": 2,
+    "SERVO_LAG": 3,
+    "STUCK_AXIS": 4,
+    "VIBRATION": 5
+  },
+  "metrics": {
+    "accuracy": 0.9983333333333333,
+    "f1_weighted": 0.9983332916656248,
+    "classes": [
+      "CYCLE_DEGRADATION",
+      "NORMAL",
+      "SENSOR_NOISE",
+      "SERVO_LAG",
+      "STUCK_AXIS",
+      "VIBRATION"
+    ]
+  }
+}

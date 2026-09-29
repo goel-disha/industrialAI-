@@ -229,3 +229,7 @@ build/
 
 # IDE
 .vscode/
+
+# Trained ML model artifacts
+backend/ai/ml/artifacts/*.pt
+backend/ai/ml/artifacts/*.joblib

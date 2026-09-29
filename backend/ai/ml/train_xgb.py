@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, f1_score
 from xgboost import XGBClassifier
 
-from .config import ARTIFACT_DIR, FEATURE_COLUMNS, RANDOM_STATE
+from .config import ARTIFACT_DIR, FEATURE_COLUMNS, RANDOM_STATE, FEATURE_SCHEMA_VERSION
 from .train import generate
 
 
@@ -58,7 +58,12 @@ def train_xgb(samples_per_class: int = 1000):
     joblib.dump(model, ARTIFACT_DIR / "xgboost_classifier.joblib")
     joblib.dump(scaler, ARTIFACT_DIR / "xgboost_scaler.joblib")
     (ARTIFACT_DIR / "xgboost_metadata.json").write_text(
-        json.dumps({"class_to_id": class_to_id, "metrics": metrics}, indent=2)
+        json.dumps({
+            "class_to_id": class_to_id,
+            "metrics": metrics,
+            "feature_schema_version": FEATURE_SCHEMA_VERSION,
+            "features": FEATURE_COLUMNS,
+        }, indent=2)
     )
     return metrics
 

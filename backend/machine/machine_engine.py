@@ -448,9 +448,14 @@ class MachineEngine:
                     0
                 ),
 
+                "command_speed": axis1_data.get(
+                    "command_speed",
+                    0
+                ),
+
                 "actual_speed": axis1_data.get(
                     "actual_speed",
-                    0
+                    axis1_data.get("speed", 0)
                 ),
 
                 "error": axis1_data.get(
@@ -485,9 +490,14 @@ class MachineEngine:
                     0
                 ),
 
+                "command_speed": axis2_data.get(
+                    "command_speed",
+                    0
+                ),
+
                 "actual_speed": axis2_data.get(
                     "actual_speed",
-                    0
+                    axis2_data.get("speed", 0)
                 ),
 
                 "error": axis2_data.get(
@@ -522,9 +532,14 @@ class MachineEngine:
                     0
                 ),
 
+                "command_speed": axis3_data.get(
+                    "command_speed",
+                    0
+                ),
+
                 "actual_speed": axis3_data.get(
                     "actual_speed",
-                    0
+                    axis3_data.get("speed", 0)
                 ),
 
                 "error": axis3_data.get(

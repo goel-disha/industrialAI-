@@ -50,7 +50,13 @@ class LSTMService:
             cycle = row.get("cycle", {})
             if isinstance(cycle, dict) and cycle.get("number"):
                 grouped.setdefault(int(cycle["number"]), []).append(row)
-        return [grouped[k] for k in sorted(grouped)][-self.sequence_length:]
+
+        completed = {
+            number: rows
+            for number, rows in grouped.items()
+            if any(bool((row.get("cycle") or {}).get("complete")) for row in rows)
+        }
+        return [completed[k] for k in sorted(completed)][-self.sequence_length:]
 
     def predict_live(self):
         if not self.ready or not self.schema_compatible:

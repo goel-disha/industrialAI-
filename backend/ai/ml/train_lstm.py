@@ -27,9 +27,18 @@ def train_lstm(samples_per_class: int = 1000, seq_len: int = 10, epochs: int = 1
     X = scaler.fit_transform(X).astype(np.float32)
 
     sequences, targets = [], []
-    for end in range(seq_len - 1, len(X)):
-        sequences.append(X[end - seq_len + 1:end + 1])
-        targets.append(y[end])
+
+    # Keep each temporal window inside one fault-class block.
+    # The synthetic generator stores classes in contiguous blocks,
+    # so windows must not mix labels.
+    for label_id in range(len(FAULT_CLASSES)):
+        indices = np.flatnonzero(y == label_id)
+        block = X[indices]
+        if len(block) < seq_len:
+            continue
+        for end in range(seq_len - 1, len(block)):
+            sequences.append(block[end - seq_len + 1:end + 1])
+            targets.append(label_id)
 
     sequences = np.asarray(sequences, dtype=np.float32)
     targets = np.asarray(targets, dtype=np.int64)

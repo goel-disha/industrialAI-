@@ -425,6 +425,8 @@ def train_all(samples_per_class=1000):
 
         "source":
             "synthetic_controlled_fault_data",
+        "feature_schema_version":
+            FEATURE_SCHEMA_VERSION,
 
         "samples_per_class":
             samples_per_class,

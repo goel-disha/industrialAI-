@@ -68,18 +68,25 @@ class MLModelService:
 
     def build_features(self, rows):
         features = cycle_to_features(rows)
-        X = pd.DataFrame([[features[column] for column in FEATURE_COLUMNS]], columns=FEATURE_COLUMNS)
-        regression_features = [column for column in FEATURE_COLUMNS if column != "cycle_duration"]
+        X = pd.DataFrame(
+            [[features[column] for column in FEATURE_COLUMNS]],
+            columns=FEATURE_COLUMNS,
+        )
+        regression_features = [
+            column for column in FEATURE_COLUMNS
+            if column != "cycle_duration"
+        ]
         return features, X, X[regression_features]
 
-    def predict_live(self):
+    def predict_features(self, features, context=None):
         if not self.ready:
-            raise RuntimeError("ML models are not trained. Run python -m backend.ai.ml.train")
-        rows = self.get_latest_cycle()
-        if not rows:
-            raise RuntimeError("No telemetry available for ML inference.")
+            raise RuntimeError("ML models are not trained.")
 
-        features, X, X_reg = self.build_features(rows)
+        features = {column: float(features.get(column, 0.0)) for column in FEATURE_COLUMNS}
+        X = pd.DataFrame(
+            [[features[column] for column in FEATURE_COLUMNS]],
+            columns=FEATURE_COLUMNS,
+        )
         Z = self.sc.transform(X)
 
         raw_score = float(self.iso.decision_function(Z)[0])
@@ -100,16 +107,15 @@ class MLModelService:
             xgb_confidence=xgb_prediction["confidence"] if xgb_prediction else 0.0,
         )
 
-        R = self.reg_sc.transform(X_reg)
+        regression_features = [
+            column for column in FEATURE_COLUMNS
+            if column != "cycle_duration"
+        ]
+        R = self.reg_sc.transform(X[regression_features])
         predicted_duration = float(self.reg.predict(R)[0])
         explanation = explainability_service.explain_classifier(self.clf, X)
 
-        latest = rows[-1]
-        cycle = latest.get("cycle", {})
-        if not isinstance(cycle, dict):
-            cycle = {}
-
-        return {
+        result = {
             "anomaly": combined["anomaly"],
             "anomaly_score": combined["anomaly_score"],
             "predicted_fault": combined["predicted_fault"],
@@ -118,14 +124,37 @@ class MLModelService:
             "models_used": combined["models_used"],
             "xgboost": xgb_prediction,
             "predicted_next_cycle_duration": round(predicted_duration, 4),
-            "machine_state": latest.get("state", "IDLE"),
-            "cycle_number": cycle.get("number", 0),
-            "cycle_running": cycle.get("running", False),
-            "timestamp": latest.get("timestamp"),
-            "samples_used": len(rows),
             "explanation": explanation,
             "features": features,
         }
+        if context:
+            result.update(context)
+        return result
+
+    def predict_live(self):
+        if not self.ready:
+            raise RuntimeError("ML models are not trained. Run python -m backend.ai.ml.train")
+        rows = self.get_latest_cycle()
+        if not rows:
+            raise RuntimeError("No telemetry available for ML inference.")
+
+        features, _, _ = self.build_features(rows)
+
+        latest = rows[-1]
+        cycle = latest.get("cycle", {})
+        if not isinstance(cycle, dict):
+            cycle = {}
+
+        return self.predict_features(
+            features,
+            context={
+                "machine_state": latest.get("state", "IDLE"),
+                "cycle_number": cycle.get("number", 0),
+                "cycle_running": cycle.get("running", False),
+                "timestamp": latest.get("timestamp"),
+                "samples_used": len(rows),
+            },
+        )
 
 
 ml_service = MLModelService()

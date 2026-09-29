@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
-from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FAULT_CLASSES, RANDOM_STATE
+from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FAULT_CLASSES, RANDOM_STATE, FEATURE_SCHEMA_VERSION
 from .train import generate
 from .lstm_model import FaultLSTM
 
@@ -64,6 +64,9 @@ def train_lstm(samples_per_class: int = 1000, seq_len: int = 10, epochs: int = 1
         "sequence_length": seq_len,
         "epochs": epochs,
         "classes": FAULT_CLASSES,
+        "feature_schema_version": FEATURE_SCHEMA_VERSION,
+        "features": FEATURE_COLUMNS,
+        "source": "synthetic_controlled_fault_data",
     }
 
     torch.save(

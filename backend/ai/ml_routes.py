@@ -52,12 +52,13 @@ def ml_predict():
     from .ml.features import cycle_to_features
     base_features = cycle_to_features(rows)
     simulated_features = fault_injection_service.apply(base_features)
-    prediction = ml_service.predict_features(
+    cycle = rows[-1].get("cycle", {}) or {}
+    return ml_service.predict_features(
         simulated_features,
         context={
             "machine_state": rows[-1].get("state", "IDLE"),
-            "cycle_number": (rows[-1].get("cycle", {}) or {}).get("number", 0),
-            "cycle_running": (rows[-1].get("cycle", {}) or {}).get("running", False),
+            "cycle_number": cycle.get("number", 0),
+            "cycle_running": cycle.get("running", False),
             "timestamp": rows[-1].get("timestamp"),
             "samples_used": len(rows),
             "simulation": {
@@ -66,7 +67,6 @@ def ml_predict():
             },
         },
     )
-    return prediction
 
 
 @router.get("/lstm-predict")
@@ -79,7 +79,7 @@ def ml_lstm_predict():
 
 @router.get("/maintenance")
 def ml_maintenance():
-    return maintenance_service.recommend(ml_service.predict_live())
+    return maintenance_service.recommend(ml_predict())
 
 
 @router.get("/rul")
@@ -90,7 +90,7 @@ def ml_rul():
 
 @router.get("/explain")
 def ml_explain():
-    return ml_service.predict_live().get("explanation", {})
+    return ml_predict().get("explanation", {})
 
 
 @router.get("/fault-injection")

@@ -72,13 +72,31 @@ class MLModelService:
         return groups[max(groups)]
 
     def get_latest_completed_cycle(self):
-        """Return the most recent cycle that contains a completed telemetry sample."""
+        """Return the most recent cycle whose telemetry proves the cycle ended."""
         groups = self.get_cycle_groups()
-        completed = {
-            number: rows
-            for number, rows in groups.items()
-            if any(bool((row.get("cycle") or {}).get("complete")) for row in rows)
-        }
+        completed = {}
+
+        for number, rows in groups.items():
+            for row in rows:
+                cycle = row.get("cycle") or {}
+                if not isinstance(cycle, dict):
+                    continue
+
+                # Normal completion marker written by MachineEngine.update_cycle().
+                explicit_complete = bool(cycle.get("complete"))
+
+                # Defensive fallback: an IDLE, non-running snapshot is also
+                # evidence that this numbered cycle has ended. This protects
+                # inference if the one-scan completion snapshot was missed.
+                ended_in_idle = (
+                    cycle.get("running") is False
+                    and str(row.get("state", "")).upper() == "IDLE"
+                )
+
+                if explicit_complete or ended_in_idle:
+                    completed[number] = rows
+                    break
+
         if not completed:
             return []
         return completed[max(completed)]

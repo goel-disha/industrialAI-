@@ -24,7 +24,7 @@ class AIEnsemble:
         if xgb_fault and xgb_confidence > 0:
             if xgb_fault == rf_fault:
                 fault = rf_fault
-                confidence = min(1.0, (rf_confidence + xgb_confidence) / 2.0 + 0.05)
+                confidence = (rf_confidence + xgb_confidence) / 2.0
                 agreement = "AGREE"
             elif xgb_confidence > rf_confidence:
                 fault = xgb_fault
@@ -45,6 +45,7 @@ class AIEnsemble:
             "predicted_fault": fault,
             "confidence": round(float(confidence), 4),
             "model_agreement": agreement,
+            "confidence_note": "Model probability agreement; not calibrated probability of failure.",
             "models_used": ["isolation_forest", "random_forest"]
             + (["xgboost"] if xgb_fault else []),
         }

@@ -9,7 +9,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from .config import ARTIFACT_DIR, FEATURE_COLUMNS
+from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FEATURE_SCHEMA_VERSION
 
 
 class XGBoostService:
@@ -17,6 +17,7 @@ class XGBoostService:
         self.model = None
         self.scaler = None
         self.id_to_class = {}
+        self.schema_compatible = False
         self.reload()
 
     def reload(self) -> None:
@@ -30,12 +31,13 @@ class XGBoostService:
             metadata = json.loads(metadata_path.read_text())
             class_to_id = metadata.get("class_to_id", {})
             self.id_to_class = {int(v): str(k) for k, v in class_to_id.items()}
+            self.schema_compatible = metadata.get("feature_schema_version") == FEATURE_SCHEMA_VERSION
 
     def status(self) -> Dict[str, Any]:
-        return {"ready": self.ready, "model": "xgboost_fault_classifier"}
+        return {"ready": self.ready and self.schema_compatible, "model": "xgboost_fault_classifier", "schema_compatible": self.schema_compatible}
 
     def predict(self, features: Dict[str, float]) -> Dict[str, Any] | None:
-        if not self.ready:
+        if not self.ready or not self.schema_compatible:
             return None
         X = pd.DataFrame([[features.get(c, 0.0) for c in FEATURE_COLUMNS]], columns=FEATURE_COLUMNS)
         Z = self.scaler.transform(X)

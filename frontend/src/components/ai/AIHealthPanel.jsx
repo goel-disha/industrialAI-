@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Card, CardContent, Chip, LinearProgress, Typography } from "@mui/material";
 
-const API = "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export default function AIHealthPanel() {
   const [data, setData] = useState(null);

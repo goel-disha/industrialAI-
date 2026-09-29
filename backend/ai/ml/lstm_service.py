@@ -9,7 +9,7 @@ import joblib
 import numpy as np
 import torch
 
-from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FAULT_CLASSES
+from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FAULT_CLASSES, FEATURE_SCHEMA_VERSION
 from .features import cycle_to_features
 from .lstm_model import FaultLSTM
 from backend.machine.machine_engine import engine
@@ -25,6 +25,7 @@ class LSTMService:
         scaler_path = ARTIFACT_DIR / "lstm_scaler.joblib"
         metadata_path = ARTIFACT_DIR / "lstm_metadata.json"
         self.ready = model_path.exists() and scaler_path.exists() and metadata_path.exists()
+        self.schema_compatible = False
         if not self.ready:
             return
         checkpoint = torch.load(model_path, map_location="cpu", weights_only=False)
@@ -37,9 +38,10 @@ class LSTMService:
         self.scaler = joblib.load(scaler_path)
         metadata = json.loads(metadata_path.read_text())
         self.sequence_length = int(metadata.get("sequence_length", self.sequence_length))
+        self.schema_compatible = metadata.get("feature_schema_version") == FEATURE_SCHEMA_VERSION
 
     def status(self) -> Dict[str, Any]:
-        return {"ready": self.ready, "model": "lstm_fault_classifier", "sequence_length": self.sequence_length}
+        return {"ready": self.ready and self.schema_compatible, "model": "lstm_fault_classifier", "sequence_length": self.sequence_length, "schema_compatible": self.schema_compatible}
 
     def _cycle_rows(self):
         history = engine.get_history(limit=6000)
@@ -51,7 +53,7 @@ class LSTMService:
         return [grouped[k] for k in sorted(grouped)][-self.sequence_length:]
 
     def predict_live(self):
-        if not self.ready:
+        if not self.ready or not self.schema_compatible:
             return None
         groups = self._cycle_rows()
         if len(groups) < self.sequence_length:

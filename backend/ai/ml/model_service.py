@@ -154,31 +154,33 @@ class MLModelService:
         if not cycle_numbers:
             raise RuntimeError("No cycle telemetry available for ML inference.")
 
-        latest_cycle = max(cycle_numbers)
-        latest_rows = [
-            row for row in rows
-            if int((row.get("cycle") or {}).get("number", 0)) == latest_cycle
-        ]
-        if not latest_rows or not bool((latest_rows[-1].get("cycle") or {}).get("complete")):
-            raise RuntimeError(
-                "Latest cycle is still running. ML diagnosis is available after cycle completion."
-            )
+        completed_cycles = {}
+        for row in rows:
+            cycle = row.get("cycle", {}) or {}
+            number = cycle.get("number")
+            if number and cycle.get("complete"):
+                completed_cycles.setdefault(int(number), []).append(row)
 
-        features, _, _ = self.build_features(rows)
+        if not completed_cycles:
+            raise RuntimeError("No completed cycle telemetry available for ML inference.")
 
-        latest = rows[-1]
-        cycle = latest.get("cycle", {})
-        if not isinstance(cycle, dict):
-            cycle = {}
+        inference_cycle = max(completed_cycles)
+        inference_rows = completed_cycles[inference_cycle]
+        features, _, _ = self.build_features(inference_rows)
+
+        current = rows[-1]
+        current_cycle = current.get("cycle", {}) or {}
 
         return self.predict_features(
             features,
             context={
-                "machine_state": latest.get("state", "IDLE"),
-                "cycle_number": cycle.get("number", 0),
-                "cycle_running": cycle.get("running", False),
-                "timestamp": latest.get("timestamp"),
-                "samples_used": len(rows),
+                "machine_state": current.get("state", "IDLE"),
+                "cycle_number": current_cycle.get("number", inference_cycle),
+                "cycle_running": current_cycle.get("running", False),
+                "inference_cycle_number": inference_cycle,
+                "inference_cycle_complete": True,
+                "timestamp": current.get("timestamp"),
+                "samples_used": len(inference_rows),
             },
         )
 

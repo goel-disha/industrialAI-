@@ -7,7 +7,7 @@ from .config import ARTIFACT_DIR, FEATURE_COLUMNS, FEATURE_SCHEMA_VERSION
 from .features import cycle_to_features
 from .ensemble import ensemble
 from .xgb_service import xgb_service
-from .explainability_service import explainability_service
+from ..explainability_service import explainability_service
 from backend.machine.machine_engine import engine
 
 
@@ -51,23 +51,37 @@ class MLModelService:
             },
         }
 
-    def get_latest_cycle(self):
+    def get_cycle_groups(self):
+        """Group retained telemetry by production cycle number."""
         history = engine.get_history(limit=6000)
-        if not history:
-            return []
-        cycle_numbers = []
+        groups = {}
         for row in history:
             cycle = row.get("cycle", {})
-            if isinstance(cycle, dict) and cycle.get("number"):
-                cycle_numbers.append(cycle["number"])
-        if not cycle_numbers:
-            return history[-300:]
-        latest_cycle = max(cycle_numbers)
-        return [
-            row for row in history
-            if isinstance(row.get("cycle", {}), dict)
-            and row["cycle"].get("number", 0) == latest_cycle
-        ]
+            if not isinstance(cycle, dict):
+                continue
+            number = cycle.get("number")
+            if number:
+                groups.setdefault(int(number), []).append(row)
+        return groups
+
+    def get_latest_cycle(self):
+        """Return telemetry for the latest cycle, whether running or complete."""
+        groups = self.get_cycle_groups()
+        if not groups:
+            return []
+        return groups[max(groups)]
+
+    def get_latest_completed_cycle(self):
+        """Return the most recent cycle that contains a completed telemetry sample."""
+        groups = self.get_cycle_groups()
+        completed = {
+            number: rows
+            for number, rows in groups.items()
+            if any(bool((row.get("cycle") or {}).get("complete")) for row in rows)
+        }
+        if not completed:
+            return []
+        return completed[max(completed)]
 
     def build_features(self, rows):
         features = cycle_to_features(rows)
@@ -142,33 +156,16 @@ class MLModelService:
     def predict_live(self):
         if not self.ready:
             raise RuntimeError("ML models are not trained. Run python -m backend.ai.ml.train")
-        rows = self.get_latest_cycle()
-        if not rows:
-            raise RuntimeError("No telemetry available for ML inference.")
-
-        cycle_numbers = [
-            int((row.get("cycle") or {}).get("number", 0))
-            for row in rows
-            if (row.get("cycle") or {}).get("number")
-        ]
-        if not cycle_numbers:
-            raise RuntimeError("No cycle telemetry available for ML inference.")
-
-        completed_cycles = {}
-        for row in rows:
-            cycle = row.get("cycle", {}) or {}
-            number = cycle.get("number")
-            if number and cycle.get("complete"):
-                completed_cycles.setdefault(int(number), []).append(row)
-
-        if not completed_cycles:
+        inference_rows = self.get_latest_completed_cycle()
+        if not inference_rows:
             raise RuntimeError("No completed cycle telemetry available for ML inference.")
 
-        inference_cycle = max(completed_cycles)
-        inference_rows = completed_cycles[inference_cycle]
+        inference_cycle = int(
+            (inference_rows[-1].get("cycle") or {}).get("number", 0)
+        )
         features, _, _ = self.build_features(inference_rows)
 
-        current = rows[-1]
+        current = engine.get_latest()
         current_cycle = current.get("cycle", {}) or {}
 
         return self.predict_features(

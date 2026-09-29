@@ -41,15 +41,31 @@ def ml_performance():
 
 @router.get("/predict")
 def ml_predict():
-    prediction = ml_service.predict_live()
     injection = fault_injection_service.status()
-    if injection["active"]:
-        from .ml.features import cycle_to_features
-        rows = ml_service.get_latest_cycle()
-        prediction["simulation"] = {
-            "injection": injection["injection"],
-            "features": fault_injection_service.apply(cycle_to_features(rows)),
-        }
+    if not injection["active"]:
+        return ml_service.predict_live()
+
+    rows = ml_service.get_latest_cycle()
+    if not rows:
+        raise HTTPException(status_code=503, detail="No telemetry available for fault-injection inference.")
+
+    from .ml.features import cycle_to_features
+    base_features = cycle_to_features(rows)
+    simulated_features = fault_injection_service.apply(base_features)
+    prediction = ml_service.predict_features(
+        simulated_features,
+        context={
+            "machine_state": rows[-1].get("state", "IDLE"),
+            "cycle_number": (rows[-1].get("cycle", {}) or {}).get("number", 0),
+            "cycle_running": (rows[-1].get("cycle", {}) or {}).get("running", False),
+            "timestamp": rows[-1].get("timestamp"),
+            "samples_used": len(rows),
+            "simulation": {
+                "injection": injection["injection"],
+                "base_features": base_features,
+            },
+        },
+    )
     return prediction
 
 

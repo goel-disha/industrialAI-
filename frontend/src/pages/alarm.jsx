@@ -19,7 +19,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 import "../styles/alarm.css";
 
-const API = "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export default function Alarms() {
   const [alarms, setAlarms] = useState([]);

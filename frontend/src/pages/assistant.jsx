@@ -191,6 +191,7 @@ export default function AIAssistant() {
     "What is the status of the servo axes?",
     "Are there any active alarms?",
     "Explain the current PLC sequence.",
+    "Run AI diagnostics on the latest completed cycle.",
   ];
 
   return (

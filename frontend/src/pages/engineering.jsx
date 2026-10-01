@@ -21,7 +21,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 import "../styles/engineering.css";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || (import.meta.env.VITE_API_HOST ? `https://${import.meta.env.VITE_API_HOST}` : "http://localhost:8000");
 
 export default function Engineering() {
 

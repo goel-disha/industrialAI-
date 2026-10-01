@@ -17,6 +17,7 @@ from backend.ai.ml_routes import router as ml_router
 # ==========================================================
 
 from backend.srevices.device_service import device_service
+from backend.srevices.chat_service import chat
 
 from backend.srevices.event_services import (
     get_events,
@@ -129,6 +130,14 @@ def home():
         "project": "IndustrialAI",
         "version": "1.0",
         "status": "Running"
+    }
+
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "IndustrialAI API"
     }
 
 
@@ -707,16 +716,5 @@ def control_mode(
 # ==========================================================
 
 @app.post("/chat")
-def mock_chat(
-    payload: ChatPayload
-):
-
-    return {
-        "response": (
-            "AI Assistant is currently offline. "
-            "AI diagnostics are disabled during "
-            "manual ladder logic testing. "
-            "Please configure GEMINI_API_KEY "
-            "to enable smart machine diagnostics."
-        )
-    }
+def chat_endpoint(payload: ChatPayload):
+    return chat(payload.message)

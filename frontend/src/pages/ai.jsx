@@ -11,7 +11,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import "../styles/ai.css";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || (import.meta.env.VITE_API_HOST ? `https://${import.meta.env.VITE_API_HOST}` : "http://localhost:8000");
 
 export default function AI() {
   const [prediction, setPrediction] = useState(null);

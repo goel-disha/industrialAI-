@@ -82,6 +82,7 @@ export default function Explorer() {
 
       if (!selected && list.length) {
         setSelected(list[0]);
+        selectDevice(list[0]);
       }
     } catch (error) {
       console.error("Explorer device error:", error);
@@ -199,9 +200,21 @@ export default function Explorer() {
             fullWidth
             size="small"
             value={search}
-            onChange={(event) =>
-              setSearch(event.target.value)
-            }
+            onChange={(event) => {
+              const value = event.target.value;
+              setSearch(value);
+
+              const query = value.trim().toLowerCase();
+              const match = devices.find((device) =>
+                JSON.stringify(device)
+                  .toLowerCase()
+                  .includes(query)
+              );
+
+              if (match && match.address !== selected?.address) {
+                selectDevice(match);
+              }
+            }}
             placeholder="Search X20, Y46, M90, L501, D300..."
             InputProps={{
               startAdornment: (

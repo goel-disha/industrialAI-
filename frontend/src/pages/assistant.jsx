@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 import SmartToyIcon from "@mui/icons-material/SmartToy";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PersonIcon from "@mui/icons-material/Person";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -262,7 +262,7 @@ export default function AIAssistant() {
                 onClick={clearChat}
                 title="Clear conversation"
               >
-                <DeleteOutlineIcon />
+                <DeleteIcon />
               </IconButton>
 
             </Box>

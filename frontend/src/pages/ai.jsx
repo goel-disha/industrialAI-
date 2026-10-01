@@ -25,28 +25,53 @@ export default function AI() {
   const [axis, setAxis] = useState("a2");
   const [severity, setSeverity] = useState(0.6);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const readJson = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.detail || data.message || `Request failed: ${response.status}`);
+    }
+    return data;
+  };
 
   const load = async () => {
     try {
-      const [p, m, r, l, s, perf, fi] = await Promise.all([
-        fetch(`${API}/ai/ml/predict`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/maintenance`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/rul`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/lstm-predict`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/status`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/performance`).then((x) => x.json()),
-        fetch(`${API}/ai/ml/fault-injection`).then((x) => x.json()),
+      const [s, perf, fi] = await Promise.all([
+        readJson(`${API}/ai/ml/status`),
+        readJson(`${API}/ai/ml/performance`),
+        readJson(`${API}/ai/ml/fault-injection`),
       ]);
-      setPrediction(p);
-      setMaintenance(m);
-      setRul(r);
-      setLstm(l);
       setStatus(s);
       setPerformance(perf);
       setInjection(fi);
+
+      if (s?.ready) {
+        const [p, m, r, l] = await Promise.all([
+          readJson(`${API}/ai/ml/predict`),
+          readJson(`${API}/ai/ml/maintenance`),
+          readJson(`${API}/ai/ml/rul`),
+          readJson(`${API}/ai/ml/lstm-predict`),
+        ]);
+        setPrediction(p);
+        setMaintenance(m);
+        setRul(r);
+        setLstm(l);
+        setError("");
+      } else {
+        setPrediction(null);
+        setMaintenance(null);
+        setRul(null);
+        setLstm(null);
+        setError(s?.schema_compatible === false
+          ? `ML artifact schema mismatch. Expected schema v${s.feature_schema_version}. Retrain and redeploy the ML artifacts.`
+          : "AI inference is not ready yet. Complete at least one machine cycle after deployment.");
+      }
       setLoading(false);
     } catch (error) {
       console.error("AI dashboard error:", error);
+      setError(error.message || "Unable to load AI services.");
       setLoading(false);
     }
   };
@@ -86,11 +111,20 @@ export default function AI() {
           <Typography className="ai-title">Industrial AI Intelligence</Typography>
           <Typography className="ai-subtitle">Real-time anomaly detection, fault diagnosis, prediction, explainability and predictive maintenance</Typography>
         </Box>
-        <Chip icon={<PsychologyIcon />} label={status?.ready ? "AI ONLINE" : "AI OFFLINE"} className={status?.ready ? "ai-online" : "ai-offline"} />
+        <Chip icon={<PsychologyIcon />} label={status?.ready ? "AI ONLINE" : "AI NOT READY"} className={status?.ready ? "ai-online" : "ai-offline"} />
       </Box>
 
+      {error && (
+        <Card className="ai-card" sx={{ mb: 2 }}>
+          <CardContent>
+            <Typography className="ai-card-title"><WarningAmberIcon /> AI inference status</Typography>
+            <Typography className="maintenance-message" sx={{ mt: 1 }}>{error}</Typography>
+          </CardContent>
+        </Card>
+      )}
+
       <Grid container spacing={2}>
-        <Grid item xs={12} md={3}><Kpi title="Predicted Fault" value={prediction?.predicted_fault || "N/A"} /></Grid>
+        <Grid item xs={12} md={3}><Kpi title="Predicted Fault" value={prediction?.predicted_fault || "WAITING"} /></Grid>
         <Grid item xs={12} md={3}><Kpi title="Fault Confidence" value={`${confidence.toFixed(1)}%`} /></Grid>
         <Grid item xs={12} md={3}><Kpi title="Anomaly Score" value={`${anomalyScore.toFixed(1)}%`} /></Grid>
         <Grid item xs={12} md={3}><Kpi title="Next Cycle" value={`${Number(prediction?.predicted_next_cycle_duration || 0).toFixed(2)} s`} /></Grid>
@@ -101,7 +135,7 @@ export default function AI() {
           <Card className="ai-card"><CardContent>
             <Typography className="ai-card-title"><WarningAmberIcon /> Detection & Model Agreement</Typography>
             <Divider sx={{ my: 2 }} />
-            <Row label="Anomaly detected" value={prediction?.anomaly ? "YES" : "NO"} danger={prediction?.anomaly} />
+            <Row label="Anomaly detected" value={prediction ? (prediction.anomaly ? "YES" : "NO") : "WAITING"} danger={prediction?.anomaly} />
             <Row label="Random Forest / XGBoost" value={prediction?.model_agreement || "RF_ONLY"} />
             <Row label="LSTM prediction" value={lstm?.predicted_fault || (lstm?.status || "NOT TRAINED")} />
             <Row label="Machine state" value={prediction?.machine_state || "IDLE"} />
@@ -196,7 +230,8 @@ export default function AI() {
           <Card className="ai-card"><CardContent>
             <Typography className="ai-card-title">Model Stack</Typography>
             <Divider sx={{ my: 2 }} />
-            {Object.entries(status?.models || {}).map(([name, ready]) => <Row key={name} label={name.replaceAll("_", " ")} value={ready ? "READY" : "NOT READY"} />)}
+            <Row label="Artifact schema" value={status?.schema_compatible ? `v${status.feature_schema_version}` : "MISMATCH"} danger={status?.schema_compatible === false} />
+            {Object.entries(status?.models || {}).map(([name, ready]) => <Row key={name} label={name.replaceAll("_", " ")} value={ready ? "READY" : "NOT READY"} danger={!ready} />)}
             <Divider sx={{ my: 2 }} />
             <Typography className="ai-card-title">Evaluation</Typography>
             <Typography className="maintenance-message" sx={{ mt: 1 }}>

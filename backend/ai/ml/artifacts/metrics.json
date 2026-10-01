@@ -12,9 +12,9 @@
     ]
   },
   "anomaly_detection": {
-    "precision": 0.9853603603603603,
-    "recall": 0.875,
-    "f1": 0.926906779661017
+    "precision": 0.9864253393665159,
+    "recall": 0.872,
+    "f1": 0.9256900212314225
   },
   "fault_classification": {
     "accuracy": 1.0,
@@ -81,9 +81,9 @@
     ]
   },
   "next_cycle_duration_regression": {
-    "mae_seconds": 0.301006846558948,
-    "rmse_seconds": 0.4924741570778043,
-    "r2": 0.8489092270503235,
+    "mae_seconds": 0.31881192636032846,
+    "rmse_seconds": 0.515628842184372,
+    "r2": 0.8390286249165635,
     "target": "next_cycle_duration",
     "input_features": [
       "busy_ratio",

@@ -10,5 +10,34 @@
     "STUCK_AXIS",
     "SENSOR_NOISE",
     "CYCLE_DEGRADATION"
-  ]
+  ],
+  "feature_schema_version": 2,
+  "features": [
+    "cycle_duration",
+    "busy_ratio",
+    "state_transitions",
+    "servo_error_count",
+    "a1_mean_pos_error",
+    "a1_max_pos_error",
+    "a1_std_pos_error",
+    "a1_mean_speed",
+    "a1_mean_actual_speed",
+    "a1_speed_deviation",
+    "a1_position_std",
+    "a2_mean_pos_error",
+    "a2_max_pos_error",
+    "a2_std_pos_error",
+    "a2_mean_speed",
+    "a2_mean_actual_speed",
+    "a2_speed_deviation",
+    "a2_position_std",
+    "a3_mean_pos_error",
+    "a3_max_pos_error",
+    "a3_std_pos_error",
+    "a3_mean_speed",
+    "a3_mean_actual_speed",
+    "a3_speed_deviation",
+    "a3_position_std"
+  ],
+  "source": "synthetic_controlled_fault_data"
 }

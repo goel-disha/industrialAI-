@@ -39,8 +39,12 @@ class MLModelService:
         self.schema_compatible = self.metadata.get("feature_schema_version") == FEATURE_SCHEMA_VERSION
 
     def status(self):
+        inference_ready = self.ready and self.schema_compatible
         return {
-            "ready": self.ready,
+            "ready": inference_ready,
+            "artifacts_loaded": self.ready,
+            "schema_compatible": self.schema_compatible,
+            "feature_schema_version": FEATURE_SCHEMA_VERSION,
             "features": FEATURE_COLUMNS,
             "models": {
                 "anomaly_detection": self.ready and self.schema_compatible,

@@ -11,6 +11,10 @@ import {
   Divider,
 } from "@mui/material";
 
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import PersonIcon from "@mui/icons-material/Person";
+import SendIcon from "@mui/icons-material/Send";
 
 import "../styles/assistant.css";
 

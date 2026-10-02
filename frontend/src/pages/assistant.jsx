@@ -31,7 +31,7 @@ export default function AIAssistant() {
 
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
-  const [machine, setMachine] = useState(null);
+  const [machine, setMachine] = useState(null);\n  const [agentResult, setAgentResult] = useState(null);
 
   const messagesEndRef = useRef(null);
 
@@ -381,6 +381,76 @@ export default function AIAssistant() {
           </CardContent>
 
         </Card>
+
+        {/* ===================================================
+            AGENT INVESTIGATION
+            =================================================== */}
+
+        {agentResult && (
+          <Card sx={{ gridColumn: "1 / -1", mt: 1 }}>
+            <CardContent>
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, mb: 1 }}>
+                <Box>
+                  <Typography variant="h6">Agent Investigation</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Observe → Investigate → Recommend
+                  </Typography>
+                </Box>
+                <Chip
+                  label={agentResult.severity || "NORMAL"}
+                  color={agentResult.severity === "HIGH" ? "error" : agentResult.severity === "MEDIUM" ? "warning" : "success"}
+                  size="small"
+                />
+              </Box>
+
+              <Divider sx={{ my: 1.5 }} />
+
+              <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                {agentResult.diagnosis?.label || "Diagnosis unavailable"}
+              </Typography>
+
+              {agentResult.diagnosis?.confidence_percent != null && (
+                <Typography variant="body2" sx={{ mt: 0.5 }}>
+                  ML confidence: {Number(agentResult.diagnosis.confidence_percent).toFixed(1)}%
+                </Typography>
+              )}
+
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                <strong>Recommendation:</strong>{" "}
+                {agentResult.diagnosis?.recommendation || "Continue monitoring."}
+              </Typography>
+
+              <Typography variant="subtitle2" sx={{ mt: 2, mb: 0.5 }}>
+                Evidence
+              </Typography>
+
+              {(agentResult.evidence || []).slice(0, 6).map((item, index) => (
+                <Typography key={index} variant="body2" sx={{ mb: 0.35 }}>
+                  • {item.finding}
+                </Typography>
+              ))}
+
+              <Typography variant="subtitle2" sx={{ mt: 2, mb: 0.5 }}>
+                Tools investigated
+              </Typography>
+
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.75 }}>
+                {(agentResult.investigation || []).map((step) => (
+                  <Chip
+                    key={step.tool}
+                    size="small"
+                    label={`${step.tool} · ${step.status}`}
+                    variant="outlined"
+                  />
+                ))}
+              </Box>
+
+              <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1.5 }}>
+                Read-only diagnostic agent. Machine control still requires operator action.
+              </Typography>
+            </CardContent>
+          </Card>
+        )}
 
         {/* ===================================================
             MACHINE CONTEXT

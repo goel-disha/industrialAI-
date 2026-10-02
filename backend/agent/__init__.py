@@ -1,0 +1,1 @@
+"""IndustrialAI diagnostic agent package."""

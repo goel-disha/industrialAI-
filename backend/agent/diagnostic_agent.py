@@ -152,7 +152,7 @@ class DiagnosticAgent:
             evidence.append({"type": "alarm", "finding": "No active machine alarm reported."})
 
         if isinstance(machine, dict):
-            state = machine.get("state") or machine.get("machine_state")
+            machine_info = machine.get("machine", {})\n            state = machine_info.get("state") or machine.get("machine_state")
             if state is not None:
                 evidence.append({"type": "machine", "finding": f"Machine state is {state}."})
 

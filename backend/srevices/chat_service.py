@@ -110,6 +110,24 @@ def _sequence_answer(data):
     )
 
 
+
+def _agent_answer(message):
+    from backend.agent.diagnostic_agent import agent
+    result = agent.investigate(message, trigger="assistant")
+    diagnosis = result["diagnosis"]
+    evidence = result.get("evidence", [])
+    lines = [
+        f"Diagnostic Agent: {diagnosis['label']}.",
+        f"Severity: {result['severity']}.",
+    ]
+    if diagnosis.get("confidence_percent") is not None:
+        lines.append(f"ML confidence: {diagnosis['confidence_percent']:.1f}%.")
+    lines.append("Evidence:")
+    lines.extend(f"- {item['finding']}" for item in evidence[:6])
+    lines.append(f"Recommendation: {diagnosis['recommendation']}")
+    return {"response": "\n".join(lines), "agent": result}
+
+
 def _ai_answer():
     try:
         from backend.ai.ml.model_service import ml_service
@@ -146,6 +164,16 @@ def chat(message: str):
                 "production cycles, the PLC sequence, or AI diagnostics."
             ),
             "mode": "local",
+        }
+
+    if any(word in text for word in ("diagnos", "anomal", "maintenance", "root cause", "why is", "why did")):
+        result = _agent_answer(message)
+        return {
+            "response": result["response"],
+            "mode": "agent",
+            "agent": result["agent"],
+            "machine_state": data["machine"]["state"],
+            "cycle_number": data["machine"]["cycle_number"],
         }
 
     if any(word in text for word in ("servo", "axis", "axes", "motor")):

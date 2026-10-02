@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
 from .diagnostic_agent import agent
+from .monitor import agent_monitor
 
 router = APIRouter(prefix="/ai/agent", tags=["AI Agent"])
 
@@ -20,6 +21,7 @@ def agent_status():
         "agent": "IndustrialAI Machine Diagnostic Agent",
         "ready": True,
         "mode": "read_only",
+        "monitoring": "on_demand",
         "capabilities": [
             "machine_status",
             "active_alarms",
@@ -28,6 +30,7 @@ def agent_status():
             "rul",
             "maintenance",
             "evidence_based_diagnosis",
+            "autonomous_monitoring",
         ],
     }
 
@@ -35,3 +38,8 @@ def agent_status():
 @router.post("/investigate")
 def investigate(payload: AgentRequest):
     return agent.investigate(payload.question, payload.trigger)
+
+
+@router.get("/monitor")
+def monitor():
+    return agent_monitor.check()

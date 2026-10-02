@@ -60,7 +60,8 @@ class DiagnosticAgent:
         if abnormal or any(k in question.lower() for k in ("why", "diagnos", "maintain", "fault", "anomal", "rul")):
             cycles = self._run("cycle_history", limit=10)
             steps.append({"tool": "cycle_history", "status": "complete" if cycles.get("available") else "failed"})
-            rul_score = self._number((ml_prediction or {}).get("anomaly_score")) if isinstance(ml_prediction, dict) else 0.0\n            rul = self._run("rul", anomaly_score=rul_score or 0.0)
+            rul_score = self._number((ml_prediction or {}).get("anomaly_score")) if isinstance(ml_prediction, dict) else 0.0
+            rul = self._run("rul", anomaly_score=rul_score or 0.0)
             steps.append({"tool": "rul", "status": "complete" if rul.get("available") else "failed"})
             maintenance = self._run("maintenance", prediction=ml_prediction if isinstance(ml_prediction, dict) else {})
             steps.append({"tool": "maintenance", "status": "complete" if maintenance.get("available") else "failed"})
@@ -155,7 +156,7 @@ class DiagnosticAgent:
             if state is not None:
                 evidence.append({"type": "machine", "finding": f"Machine state is {state}."})
 
-            axes = machine.get("axes")
+            axes = machine.get("servo")
             if isinstance(axes, dict):
                 for axis, data in axes.items():
                     if isinstance(data, dict):

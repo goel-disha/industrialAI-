@@ -70,6 +70,34 @@ export default function AIAssistant() {
     return () => clearInterval(interval);
   }, []);
 
+  // Read-only autonomous agent monitoring. It only surfaces an investigation
+  // when the backend detects an abnormal condition.
+  useEffect(() => {
+    let cancelled = false;
+
+    const checkAgent = async () => {
+      try {
+        const response = await fetch(`${API}/ai/agent/monitor`);
+        if (!response.ok) return;
+        const data = await response.json();
+
+        if (!cancelled && data.monitor?.abnormal && data.monitor?.new_incident) {
+          setAgentResult(data);
+        }
+      } catch (error) {
+        console.error("Agent monitor error:", error);
+      }
+    };
+
+    checkAgent();
+    const interval = setInterval(checkAgent, 15000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, []);
+
   // ==========================================================
   // AUTO SCROLL
   // ==========================================================

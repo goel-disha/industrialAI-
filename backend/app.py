@@ -11,6 +11,7 @@ from backend.database import get_connection
 from backend.machine.machine_engine import engine
 from backend.srevices.ai_routes import router as ai_router
 from backend.ai.ml_routes import router as ml_router
+from backend.agent.routes import router as agent_router
 
 # ==========================================================
 # Services
@@ -163,6 +164,7 @@ def get_machine():
 
 app.include_router(ai_router)
 app.include_router(ml_router)
+app.include_router(agent_router)
 
 # ==========================================================
 # Events

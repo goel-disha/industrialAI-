@@ -1,111 +1,82 @@
-"""Read-only tools exposed to the IndustrialAI diagnostic agent.
-
-The tools deliberately return plain JSON-safe dictionaries so the agent can
-reason over the existing machine, ML, alarm and maintenance services without
-coupling the UI to implementation details.
-"""
+"""Read-only tools exposed to the IndustrialAI diagnostic agent."""
 from __future__ import annotations
 
 from typing import Any
 import importlib
 
 
-def _safe_call(module_name: str, function_name: str, default: Any = None, *args, **kwargs):
+def _call(module_name: str, object_name: str, method: str | None = None, *args, **kwargs):
     try:
         module = importlib.import_module(module_name)
-        fn = getattr(module, function_name)
-        return fn(*args, **kwargs)
+        obj = getattr(module, object_name)
+        if method:
+            obj = getattr(obj, method)
+        return {"available": True, "value": obj(*args, **kwargs)}
     except Exception as exc:
-        return {"available": False, "error": f"{type(exc).__name__}: {exc}", "value": default}
-
-
-def _unwrap(value: Any) -> Any:
-    if isinstance(value, dict) and "value" in value and value.get("available") is False:
-        return value
-    return value
+        return {"available": False, "error": f"{type(exc).__name__}: {exc}"}
 
 
 def get_machine_status() -> dict:
-    result = _safe_call("backend.live_monitor_services", "live_monitor", {})
-    result = _unwrap(result)
-    return result if isinstance(result, dict) else {"available": False, "value": result}
+    result = _call("backend.srevices.live_monitor_services", "live_monitor")
+    return result.get("value", result)
 
 
 def get_active_alarms() -> dict:
-    result = _safe_call("backend.live_monitor_services", "get_active_alarms", [])
-    result = _unwrap(result)
-    if isinstance(result, dict):
-        return result
-    return {"available": True, "alarms": result or []}
+    result = _call("backend.srevices.alarm_services", "get_active_alarms")
+    value = result.get("value")
+    return {"available": result.get("available", False), "alarms": value or [], **({"error": result["error"]} if not result.get("available") else {})}
 
 
 def get_ml_diagnostics() -> dict:
     try:
         from backend.ai.ml.model_service import ml_service
-        prediction = ml_service.predict_live()
-        return {"available": True, "prediction": prediction}
+        return {"available": True, "prediction": ml_service.predict_live()}
     except Exception as exc:
         return {"available": False, "error": f"{type(exc).__name__}: {exc}"}
 
 
-def get_rul() -> dict:
-    candidates = [
-        ("backend.ai.ml.rul_service", "predict_rul"),
-        ("backend.ai.rul_service", "predict_rul"),
-    ]
-    for module_name, fn_name in candidates:
-        result = _safe_call(module_name, fn_name, None)
-        if not (isinstance(result, dict) and result.get("available") is False):
-            return {"available": True, "result": result}
-    return {"available": False, "error": "RUL service is unavailable"}
-
-
-def get_maintenance() -> dict:
-    candidates = [
-        ("backend.ai.ml.maintenance_service", "get_maintenance_recommendation"),
-        ("backend.ai.maintenance_service", "get_maintenance_recommendation"),
-    ]
-    for module_name, fn_name in candidates:
-        result = _safe_call(module_name, fn_name, None)
-        if not (isinstance(result, dict) and result.get("available") is False):
-            return {"available": True, "result": result}
-    return {"available": False, "error": "Maintenance service is unavailable"}
-
-
 def get_cycle_history(limit: int = 10) -> dict:
-    """Best-effort access to cycle intelligence/history without assuming one DB schema."""
-    candidates = [
-        ("backend.ai.cycle_intelligence", "get_cycle_history"),
-        ("backend.ai.cycle_intelligence", "recent_cycles"),
-        ("backend.production_engine", "get_cycle_history"),
-    ]
-    for module_name, fn_name in candidates:
-        result = _safe_call(module_name, fn_name, None, limit=limit)
-        if not (isinstance(result, dict) and result.get("available") is False):
-            return {"available": True, "cycles": result}
-    return {"available": False, "error": "Cycle history service is unavailable"}
+    result = _call("backend.ai.cycle_intelligence", "cycle_intelligence", "get_report", limit=limit)
+    if result.get("available"):
+        return {"available": True, "report": result["value"]}
+    return result
+
+
+def get_rul(anomaly_score: float = 0.0) -> dict:
+    result = _call("backend.ai.rul_service", "rul_service", "predict", anomaly_score=anomaly_score)
+    if result.get("available"):
+        return {"available": True, "result": result["value"]}
+    return result
+
+
+def get_maintenance(prediction: dict | None = None) -> dict:
+    prediction = prediction or {}
+    result = _call("backend.ai.maintenance_service", "maintenance_service", "recommend", prediction)
+    if result.get("available"):
+        return {"available": True, "result": result["value"]}
+    return result
 
 
 def get_servo_status(axis: str | None = None) -> dict:
     machine = get_machine_status()
-    servo = machine.get("servo") if isinstance(machine, dict) else None
-    axes = machine.get("axes") if isinstance(machine, dict) else None
+    if not isinstance(machine, dict):
+        return {"available": False, "error": "Machine status unavailable"}
 
-    if axis and isinstance(axes, dict):
+    servo = machine.get("servo", {})
+    if axis:
         key = axis.lower().replace("axis", "").strip()
-        aliases = {"1": "a1", "2": "a2", "3": "a3"}
+        aliases = {"1": "axis1", "2": "axis2", "3": "axis3"}
         target = aliases.get(key, axis.lower())
-        return {"available": True, "axis": target, "status": axes.get(target, axes.get(axis))}
-
-    return {"available": True, "servo": servo, "axes": axes}
+        return {"available": True, "axis": target, "status": servo.get(target)}
+    return {"available": True, "servo": servo, "servo_status": machine.get("servo_status", {})}
 
 
 TOOL_REGISTRY = {
     "machine_status": get_machine_status,
     "active_alarms": get_active_alarms,
     "ml_diagnostics": get_ml_diagnostics,
+    "cycle_history": get_cycle_history,
     "rul": get_rul,
     "maintenance": get_maintenance,
-    "cycle_history": get_cycle_history,
     "servo_status": get_servo_status,
 }

@@ -31,7 +31,8 @@ export default function AIAssistant() {
 
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
-  const [machine, setMachine] = useState(null);\n  const [agentResult, setAgentResult] = useState(null);
+  const [machine, setMachine] = useState(null);
+  const [agentResult, setAgentResult] = useState(null);
 
   const messagesEndRef = useRef(null);
 
@@ -125,6 +126,10 @@ export default function AIAssistant() {
 
       const data = await response.json();
 
+      if (data.mode === "agent" && data.agent) {
+        setAgentResult(data.agent);
+      }
+
       setMessages((previous) => [
         ...previous,
         {
@@ -173,6 +178,7 @@ export default function AIAssistant() {
   // ==========================================================
 
   const clearChat = () => {
+    setAgentResult(null);
     setMessages([
       {
         role: "assistant",

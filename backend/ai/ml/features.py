@@ -11,6 +11,15 @@ def num(value, default=0.0):
         return default
 
 
+def _motion_jitter(positions, span):
+    """Estimate high-frequency position jitter, not total travel variation."""
+    if len(positions) < 3:
+        return 0.0
+    values = np.asarray(positions, dtype=float)
+    second_diff = np.diff(values, n=2)
+    return float(np.std(second_diff) / max(span, 1.0))
+
+
 def cycle_to_features(rows: Iterable[dict]) -> Dict[str, float]:
     """
     Convert one completed machine cycle into dimensionless, scale-stable
@@ -70,6 +79,7 @@ def cycle_to_features(rows: Iterable[dict]) -> Dict[str, float]:
         ]
 
         normalized_positions = [p / span for p in positions]
+        jitter = _motion_jitter(positions, span)
 
         out.update({
             f"{prefix}_mean_pos_error": float(np.mean(pos_errors)),
@@ -79,6 +89,7 @@ def cycle_to_features(rows: Iterable[dict]) -> Dict[str, float]:
             f"{prefix}_mean_actual_speed": float(np.mean(speed_ratios)),
             f"{prefix}_speed_deviation": float(np.mean(deviations)),
             f"{prefix}_position_std": float(np.std(normalized_positions)),
+            f"{prefix}_motion_jitter": jitter,
         })
 
     return {k: float(out.get(k, 0.0)) for k in FEATURE_COLUMNS}

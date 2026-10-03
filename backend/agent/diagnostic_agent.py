@@ -157,18 +157,26 @@ class DiagnosticAgent:
             if state is not None:
                 evidence.append({"type": "machine", "finding": f"Machine state is {state}."})
 
+            # Do not use the live PLC position error as a diagnostic finding.
+            # During normal motion this value is simply target - current position
+            # and can change by tens of thousands of pulses every scan. ML
+            # inference is based on completed-cycle aggregated/normalized
+            # telemetry instead.
             axes = machine.get("servo")
             if isinstance(axes, dict):
+                active_axis_errors = []
                 for axis, data in axes.items():
-                    if isinstance(data, dict):
-                        error = data.get("position_error") or data.get("pos_error")
-                        error_num = self._number(error)
-                        if error_num is not None and abs(error_num) > 0:
-                            evidence.append({
-                                "type": "servo",
-                                "finding": f"{axis} position error is {error_num:g}.",
-                                "value": error_num,
-                            })
+                    if isinstance(data, dict) and bool(data.get("error")):
+                        active_axis_errors.append(axis)
+                if active_axis_errors:
+                    evidence.append({
+                        "type": "servo",
+                        "finding": (
+                            "Servo drive error flag is active on "
+                            + ", ".join(active_axis_errors)
+                            + "."
+                        ),
+                    })
 
         if isinstance(rul, dict) and rul.get("result") is not None:
             evidence.append({"type": "rul", "finding": "RUL analysis was requested for this investigation."})

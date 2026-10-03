@@ -6,7 +6,7 @@ ARTIFACT_DIR.mkdir(exist_ok=True)
 DATA_DIR.mkdir(exist_ok=True)
 
 RANDOM_STATE = 42
-FEATURE_SCHEMA_VERSION = 2
+FEATURE_SCHEMA_VERSION = 3
 
 FEATURE_COLUMNS = [
     "cycle_duration",
@@ -24,6 +24,7 @@ FEATURE_COLUMNS = [
         "mean_actual_speed",
         "speed_deviation",
         "position_std",
+        "motion_jitter",
     )
 ]
 

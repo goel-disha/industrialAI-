@@ -53,6 +53,7 @@ def generate(n=1000):
                 d[f"{p}_mean_actual_speed"] = np.clip(r.normal(0.995, 0.015), 0.0, 1.1)
                 d[f"{p}_speed_deviation"] = abs(r.normal(0.02, 0.008))
                 d[f"{p}_position_std"] = abs(r.normal(0.015, 0.004))
+                d[f"{p}_motion_jitter"] = abs(r.normal(0.002, 0.0006))
 
             if label == "SERVO_LAG":
                 d["a2_mean_actual_speed"] = np.clip(r.uniform(0.35, 0.65), 0.0, 1.0)
@@ -75,9 +76,10 @@ def generate(n=1000):
                 d["cycle_duration"] *= r.uniform(1.25, 1.55)
 
             elif label == "SENSOR_NOISE":
+                # Sensor noise is high-frequency jitter, not total axis travel.
                 for p in ("a1", "a2", "a3"):
-                    d[f"{p}_position_std"] *= 5
-                    d[f"{p}_std_pos_error"] *= 4
+                    d[f"{p}_motion_jitter"] = r.uniform(0.018, 0.040)
+                    d[f"{p}_std_pos_error"] *= r.uniform(1.2, 1.8)
 
             elif label == "CYCLE_DEGRADATION":
                 d["cycle_duration"] *= r.uniform(1.20, 1.45)

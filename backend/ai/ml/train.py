@@ -78,7 +78,6 @@ def generate(n=1000):
                 # Sensor noise is high-frequency jitter, not total axis travel.
                 for p in ("a1", "a2", "a3"):
                     d[f"{p}_motion_jitter"] = r.uniform(0.018, 0.040)
-                    d[f"{p}_std_pos_error"] *= r.uniform(1.2, 1.8)
 
             elif label == "CYCLE_DEGRADATION":
                 d["cycle_duration"] *= r.uniform(1.20, 1.45)

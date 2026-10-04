@@ -52,7 +52,6 @@ def generate(n=1000):
                 d[f"{p}_mean_speed"] = 1.0
                 d[f"{p}_mean_actual_speed"] = np.clip(r.normal(0.995, 0.015), 0.0, 1.1)
                 d[f"{p}_speed_deviation"] = abs(r.normal(0.02, 0.008))
-                d[f"{p}_position_std"] = abs(r.normal(0.015, 0.004))
                 d[f"{p}_motion_jitter"] = abs(r.normal(0.002, 0.0006))
 
             if label == "SERVO_LAG":
@@ -63,8 +62,8 @@ def generate(n=1000):
                 d["cycle_duration"] *= r.uniform(1.08, 1.20)
 
             elif label == "VIBRATION":
-                d["a2_position_std"] *= 4
-                d["a3_position_std"] *= 3
+                d["a2_motion_jitter"] *= 4
+                d["a3_motion_jitter"] *= 3
                 d["a2_std_pos_error"] *= 3
                 d["a3_std_pos_error"] *= 2.5
 

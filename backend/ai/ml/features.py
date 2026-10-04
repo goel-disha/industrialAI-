@@ -88,7 +88,6 @@ def cycle_to_features(rows: Iterable[dict]) -> Dict[str, float]:
             f"{prefix}_mean_speed": float(np.mean([1.0 if c > 1e-9 else 0.0 for c in commands])),
             f"{prefix}_mean_actual_speed": float(np.mean(speed_ratios)),
             f"{prefix}_speed_deviation": float(np.mean(deviations)),
-            f"{prefix}_position_std": float(np.std(normalized_positions)),
             f"{prefix}_motion_jitter": jitter,
         })
 

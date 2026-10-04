@@ -23,7 +23,7 @@ FEATURE_COLUMNS = [
         "mean_speed",
         "mean_actual_speed",
         "speed_deviation",
-        "position_std",
+        "motion_jitter",
         "motion_jitter",
     )
 ]
